@@ -20,7 +20,7 @@ class MpesaApi
 	private $response;
 	private $accessToken;
 	private $tockenString;
-	public function __construct()
+	public function __construct($id)
 	{
 		// tocken requirements
 		$this->consumerKey     	 ="b5zUKrwKQ0uczvCzZQG2Kl72Scky9P0f";
@@ -28,11 +28,11 @@ class MpesaApi
 		$this->credentials     	 = base64_encode($this->consumerKey.":".$this->consumerSecret);		
 		//process requirements		
 		$this->BusinessShortCode = 174379;
-		$this->Timestamp 		 = date("YmdGis");
+		$this->Timestamp 		 = date("YmdHis");
 		$this->PartyA 			 = 600982;
 		$this->PartyB 			 = 600000;
 		$this->PhoneNumber       = "254708374149";
-		$this->CallBackURL       = "https://610e-197-232-61-225.eu.ngrok.io/patanisha/index.php?source=1";
+		$this->CallBackURL       = "https://dff5-197-180-251-95.ngrok.io/gtc/PAM/mpesa/index.php?orderId=".$id;
 		$this->AccountReference  = 'CART001';
 		$this->TransactionDesc   = 'Cart Payment Online';		
 		$this->PassKey           = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
@@ -44,7 +44,7 @@ class MpesaApi
 		$this->tockenString      = "";
 		$this->url  			 = "";
 		// $date = DateTime::createFromFormat('YmdGisu', $this->Timestamp);
-		echo date('Y-m-d H:i:s');
+		// echo date('Y-m-d H:i:s');
         // $milliseconds = $this->Timestamp;
 		// $seconds = (int) ($milliseconds / 1000); // convert milliseconds to seconds
 		// $date = date('Y-m-d H:i:s', strtotime("1970-01-01 +$seconds seconds")); // convert seconds to Unix timestamp and format date

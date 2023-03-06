@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <!-- Paypal Payment -->
 
                 <!-- <img  class="img-responsive" src="images/paypal_img.png" alt="img_paypal"> -->
-                <form action="" class="form-login" method="post"><!-- form-login begin -->
+                <form action="orders.php" class="form-login" method="post"><!-- form-login begin -->
                             <h2 class="form-login-heading"> complete payment</h2>                            
                             <input type="text" class="form-control" placeholder="amount" name="amount" required="" readonly="" value="20">   <br>                         
                             <input type="text" class="form-control" placeholder="Enter phone number for payment" name="phone" required=""><br>

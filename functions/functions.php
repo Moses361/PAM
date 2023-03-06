@@ -308,7 +308,8 @@ function total_price(){
 
    }
 
-     echo"Ksh." . $total;
+     echo $total;
+     return $total;
    
 
 
