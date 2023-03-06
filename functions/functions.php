@@ -1,6 +1,7 @@
 <?php
 
-    $db = mysqli_connect("localhost","root","","ecom_store");
+    // $db = mysqli_connect("localhost","root","","ecom_store");
+    $db = mysqli_connect ("localhost","colls","1234","pam");
 
  /// begining getRealIpUser function///   
 

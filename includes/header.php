@@ -144,6 +144,9 @@
                               <li class="<?php if($active=='SHOPPING CART') echo"active"; ?>">
                                   <a href="cart.php">ORDER CAT</a>
                               </li>
+                              <li class="<?php if($active=='SHOPPING') echo"active"; ?>">
+                                  <a href="referals.php">Referals</a>
+                              </li>
                               <li class="<?php if($active=='MY ACCOUNT') echo"active"; ?>">
                                  
                                        <?php 
@@ -151,6 +154,7 @@
                                           if(!isset($_SESSION['customer_email'])){
 
                                                 echo"<a href='checkout.php'>MY ACCOUNT</a>";
+                                                // echo"<a href='referals.php'>Referals</a>";
                                           }else{
 
                                                echo"<a href='customer/my_account.php?my_orders'>MY ACCOUNT</a>";

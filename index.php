@@ -1,6 +1,7 @@
 <?php 
     $active='HOME';
    include("includes/header.php");
+//    require_once "Fucntions.php";
 
 ?>
 
