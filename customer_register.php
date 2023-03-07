@@ -1,6 +1,75 @@
 <?php 
      $active='MY ACCOUNT';
     include("includes/header.php");
+    if(isset($_POST['register'])){
+        // print("hello");
+        // die();
+        
+        $c_name = $_POST['c_name'];
+    
+        $s_name = $_POST['s_name'];
+        
+        $c_email = $_POST['c_email'];
+        
+        $c_pass = $_POST['c_pass'];
+        
+        $c_county = $_POST['c_county'];
+        
+        $c_contact = $_POST['c_contact'];
+        
+        $c_address = $_POST['c_address'];
+        $ref = $_POST['ref'];
+        
+        $c_image = $_FILES['c_image']['name'];
+        
+        $c_image_tmp = $_FILES['c_image']['tmp_name'];
+        
+        $c_ip = getRealIpUser();
+        
+        move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+        
+        $insert_customer = "insert into customers (customer_name,second_name,customer_email,customer_pass,customer_county,customer_contact,customer_address,customer_image,customer_ip, customer_city) values ('$c_name','$s_name','$c_email','$c_pass','$c_county','$c_contact','$c_address','$c_image','$c_ip', 'nairobi')";
+        
+        $run_customer = mysqli_query($con,$insert_customer);
+    
+      
+        
+        $sel_cart = "select * from cart where ip_add='$c_ip'";
+        
+        $run_cart = mysqli_query($con,$sel_cart);
+        
+        $check_cart = mysqli_num_rows($run_cart);
+        $datet = date('Y-m-d H:i:s');
+        $discount = 100;
+        // update referal 
+        $insert_customer2 = "insert into referals (date, initiator, username, link_code, discount) values ('$datet','$ref','$c_email','$c_email','$discount')";    
+        $run_customer = mysqli_query($con,$insert_customer2);
+    
+    
+        
+        if($check_cart>0){
+            
+            /// If register have items in cart ///
+            
+            $_SESSION['customer_email']=$c_email;
+            
+            echo "<script>alert('You have been Registered Sucessfully')</script>";
+            
+            echo "<script>window.open('checkout.php','_self')</script>";
+            
+        }else{
+            
+            /// If register without items in cart ///
+            
+           /// $_SESSION['customer_email']=$c_email;
+            
+            echo "<script>alert('You have been Registered Sucessfully')</script>";
+            
+            echo "<script>window.open('index.php','_self')</script>";
+            
+        }
+        
+    }
 
 
 ?>
@@ -39,7 +108,7 @@
                 </p><!--text-muted  Finish -->
                
              </center>
-             <form action="customer_register.php" method="post" enctype="multipart/form-data"><!--form  begin -->
+             <form action="" method="post" enctype="multipart/form-data"><!--form  begin -->
              
                 <div class="formm-group"><!--form-group  begin-->
                 
@@ -83,6 +152,12 @@
                     <input type="text" class="form-control" name="c_address" required>
                 
                 </div><!--form-group  Finish -->
+                <div class="formm-group"><!--form-group  begin-->
+                
+                <label>referal email</label>
+                   <input type="text" class="form-control" name="ref" required>            
+                 </div>
+            <!--form-group  Finish -->
                  <div class="formm-group"><!--form-group  begin-->
                 
                     <label>Profile Picture</label>
@@ -124,61 +199,9 @@
 
 <?php 
 
-  if(isset($_POST['register'])){
-    
-    $c_name = $_POST['c_name'];
 
-    $s_name = $_POST['s_name'];
+ 
+   
     
-    $c_email = $_POST['c_email'];
-    
-    $c_pass = $_POST['c_pass'];
-    
-    $c_county = $_POST['c_county'];
-    
-    $c_contact = $_POST['c_contact'];
-    
-    $c_address = $_POST['c_address'];
-    
-    $c_image = $_FILES['c_image']['name'];
-    
-    $c_image_tmp = $_FILES['c_image']['tmp_name'];
-    
-    $c_ip = getRealIpUser();
-    
-    move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
-    
-    $insert_customer = "insert into customers (customer_name,second_name,customer_email,customer_pass,customer_county,customer_contact,customer_address,customer_image,customer_ip) values ('$c_name','$s_name','$c_email','$c_pass','$c_county','$c_contact','$c_address','$c_image','$c_ip')";
-    
-    $run_customer = mysqli_query($con,$insert_customer);
-    
-    $sel_cart = "select * from cart where ip_add='$c_ip'";
-    
-    $run_cart = mysqli_query($con,$sel_cart);
-    
-    $check_cart = mysqli_num_rows($run_cart);
-    
-    if($check_cart>0){
-        
-        /// If register have items in cart ///
-        
-        $_SESSION['customer_email']=$c_email;
-        
-        echo "<script>alert('You have been Registered Sucessfully')</script>";
-        
-        echo "<script>window.open('checkout.php','_self')</script>";
-        
-    }else{
-        
-        /// If register without items in cart ///
-        
-       /// $_SESSION['customer_email']=$c_email;
-        
-        echo "<script>alert('You have been Registered Sucessfully')</script>";
-        
-        echo "<script>window.open('index.php','_self')</script>";
-        
-    }
-    
-}
+
 ?>

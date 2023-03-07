@@ -21,7 +21,7 @@ function getRealIpUser(){
 
 /// begin add_cart functions ///
 
-function add_cart(){
+function add_cart($total){
     
     global $db;
     
@@ -31,11 +31,11 @@ function add_cart(){
         
         $ip_add = getRealIpUser();
         
-        $p_id = $_GET['add_cart'];
+        $p_id = @$_GET['add_cart'];
         
-        $product_qty = $_POST['product_qty'];
+        $product_qty = @$_POST['product_qty'];
         
-        $product_size = $_POST['product_size'];
+        $product_size = @$_POST['product_size'];
         
         $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         
@@ -48,9 +48,9 @@ function add_cart(){
             
         }else{
             
-            $query = "insert into cart (p_id,ip_add,qty,size) values ('$p_id','$ip_add','$product_qty','$product_size')";
+            $query = "insert into cart (p_id,ip_add,qty,size, p_price) values ('$p_id','$ip_add','$product_qty','$product_size', '$total')";
             
-            $run_query = mysqli_query($db,$query);
+            $run_query = @mysqli_query($db,$query);
             
             echo "<script>window.open('details.php?pro_id=$p_id','_self')</script>";
             
@@ -314,7 +314,34 @@ function total_price(){
 
 
 }
+function total_price2(){
 
+    global $db;
+    $ip_add = getRealIpUser();
+    $total = 0;
+    $select_cart = "select * from cart where ip_add='$ip_add'";
+    $run_cart = mysqli_query($db, $select_cart);
+    while($record=mysqli_fetch_array($run_cart)){
+ 
+         $pro_id = $record['p_id'];
+         $pro_qty = $record['qty'];
+         $get_price = "select * from products where product_id='$pro_id'";
+         $run_price = mysqli_query($db,$get_price );
+         while($row_price=mysqli_fetch_array($run_price)){
+ 
+             $sub_total = $row_price['product_price']*$pro_qty;
+             $total  += $sub_total;
+ 
+         }
+ 
+    }
+ 
+    //   echo $total;
+      return $total;
+    
+ 
+ 
+ }
 
 /// finish total_price function/// 
 

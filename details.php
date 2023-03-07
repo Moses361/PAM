@@ -2,6 +2,10 @@
 
     $active='Cart';
     include("includes/header.php");
+    if(isset($_POST['addToCar'])){
+        add_cart(); 
+
+    }
 
 ?>
    
@@ -76,8 +80,18 @@
                    <div class="col-sm-6"><!-- col-sm-6 Begin -->
                        <div class="box"><!-- box Begin -->
                            <h1 class="text-center"> <?php ///echo $pro_title; ?> </h1>
+
                            
-                           <?php add_cart(); ?>
+                           <?php
+                            // if(!empty($_GET['add_cart'])  && !empty($_POST['product_qty']) && !empty($_POST['product_size'])){
+                                $total = total_price2();
+                            add_cart($total); 
+                            // $_SESSION['new_total'] = get_total();
+
+                            // }
+                            
+                            
+                            ?>
                            
                            <form action="details.php?add_cart=<?php echo $product_id; ?>" class="form-horizontal" method="post"><!-- form-horizontal Begin -->
                                <div class="form-group"><!-- form-group Begin -->
@@ -113,10 +127,36 @@
                                        
                                    </div><!-- col-md-7 Finish -->
                                </div><!-- form-group Finish -->
+                               <div class="form-group"><!-- form-group Begin -->
+                                   <label class="col-md-5 control-label">Delivery Point</label>
+                                   
+                                   <div class="col-md-7"><!-- col-md-7 Begin -->
+                                       
+                                       <select name="product_size" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
+                                          
+                                           <option disabled selected>Select Delivery Point</option>
+                                           <option>Nairobi</option>
+                                           <option>Western</option>
+                                           <option>Coast</option>
+                                           <option>Rift valley</option>
+                                           <option>Nyanza</option>
+                                           
+                                           
+                                       </select><!-- form-control Finish -->
+                                       
+                                   </div><!-- col-md-7 Finish -->
+                               </div><!-- form-group Finish -->
+                               <!-- <style>
+                                    #hide {
+                                        display: none;
+                                    }
+                            </style> -->
                                
-                               <p class="price"><?php echo" ksh.$pro_price"; ?></p>
+                             <div id="hide">
+                                 <p class="price" id="total">ksh <?php print(total_price2()); ?> </p>
+                             </div>
                                
-                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart"> Add to cart</button></p>
+                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p>
                                
                            </form><!-- form-horizontal Finish -->
                            
@@ -246,3 +286,17 @@
     
 </body>
 </html>
+
+<script>
+    document.getElementById("myDiv").style.display = "none";
+    function showTotal(b4){
+        alert(b4);
+        document.getElementById("myDiv").style.display = "block";
+        // document.getElementById("total"). = "block";
+
+    }
+
+</script>
+
+
+
