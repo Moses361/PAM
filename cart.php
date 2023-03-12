@@ -2,6 +2,24 @@
      $active='SHOPPING CART';
     include("includes/header.php");
 
+    $intiator = trim($_SESSION['customer_email']);
+    // print($intiator);
+    // if(trim($intiator)== "moses@gmail.com"){
+    //     print("holla");
+    // }else{
+    //     print("dye");
+    // }
+
+    $select_cart = "SELECT  * from referals where initiator  ='$intiator';";
+    $run_cart2 = mysqli_query($con,$select_cart );
+    $count2 = mysqli_num_rows($run_cart2);
+    $discount = $count2 * 200;
+
+    // print_r($discount);
+
+
+    // die();
+
 
 ?>
 
@@ -111,8 +129,33 @@
                      
                     <tfoot><!--tfoot   begin -->
                       <tr>
-                        <th colspan="5">Total</th>
+                        <th colspan="5">Sub Total</th>
                         <th colspan="2">Ksh.<?php echo $total; ?></th>
+                        
+                        
+                      </tr>
+                      <tr>
+                        <?php 
+                         $intiator = trim($_SESSION['customer_email']);
+                         $select_cart2 = "select * from referals where initiator ='$intiator'";
+                         $run_cart2 = mysqli_query($con,$select_cart2);
+                         $count2 = mysqli_num_rows($run_cart2);
+                        //  print("hello");
+                        //  print($count);  
+                         
+                         
+                        //  die();
+
+
+
+                        ?>
+                         <th colspan="5">Discount</th>
+                        <th colspan="2">Ksh.<?php print($discount);?></th>
+                        </tr>
+                        <tr>
+                            <th colspan="5">Total</th>
+                            <th colspan="2">Ksh.<?php echo $total - $discount; ?></th>
+                        
                         
                       </tr>
                       

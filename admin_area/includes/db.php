@@ -1,5 +1,5 @@
 <?php
  
-    $con = mysqli_connect ("localhost","root","","ecom_store");
+    $con = mysqli_connect ("localhost","colls","1234","pam");
 
  ?>
