@@ -40,10 +40,10 @@
                                 <th> No: </th>
                                 <th> Customer Email: </th>
                                 <th> Invoice No: </th>
-                                <th> Service  Name: </th>
-                                <th> Service Qty: </th>
-                                <th> Category: </th>
-                                <th> Order Date: </th>
+                                <!-- <th> Service  Name: </th> -->
+                                <!-- <th> Service Qty: </th> -->
+                                <!-- <th> Category: </th> -->
+                                <!-- <th> Order Date: </th> -->
                                 <th> Total Amount: </th>
                                 <th> Status: </th>
                                 <th> Delete: </th>
@@ -64,15 +64,15 @@
                                     
                                     $customer = $row_order['customer'];
                                     
-                                    $c_id = $row_order['customer_id'];
+                                    // $c_id = $row_order['customer_id'];
                                     
-                                    $invoice_no = $row_order['invoice_no'];
+                                    $invoice_no = $row_order['order_id'];
                                     
-                                    $product_id = $row_order['product_id'];
+                                    $amount = $row_order['amount'];
                                     
                                     $status = $row_order['payment_status'];
                                     
-                                    $size = $row_order['size'];
+                                    // $size = $row_order['size'];
                                     
                                     // $order_status = $row_order['order_status'];
                                     
@@ -110,11 +110,7 @@
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $customer; ?> </td>
                                 <td> <?php echo $invoice_no; ?></td>
-                                <td> <?php echo $product_title; ?> </td>
-                                <td> <?php echo $qty; ?></td>
-                                <td> <?php echo $size; ?> </td>
-                                <td> <?php echo $order_date; ?> </td>
-                                <td> <?php echo $order_amount; ?> </td>
+                                <td> <?php echo $amount; ?> </td>
                                 <td> <?php echo $status; ?> </td>
 
                               

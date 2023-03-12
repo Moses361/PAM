@@ -128,13 +128,32 @@
                                    </div><!-- col-md-7 Finish -->
                                </div><!-- form-group Finish -->
                                <div class="form-group"><!-- form-group Begin -->
-                                   <label class="col-md-5 control-label">Delivery Point</label>
+                                   <label class="col-md-5 control-label">Select origin</label>
                                    
                                    <div class="col-md-7"><!-- col-md-7 Begin -->
                                        
-                                       <select name="product_size" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
+                                       <select name="origin" id="origin" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
                                           
-                                           <option disabled selected>Select Delivery Point</option>
+                                           <option disabled selected>Select Origin </option>
+                                           <option value = 1 >Nairobi</option>
+                                           <option>Western</option>
+                                           <option>Coast</option>
+                                           <option>Rift valley</option>
+                                           <option>Nyanza</option>
+                                           
+                                           
+                                       </select><!-- form-control Finish -->
+                                       
+                                   </div><!-- col-md-7 Finish -->
+                               </div><!-- form-group Finish -->  
+                               <div class="form-group"><!-- form-group Begin -->
+                                   <label class="col-md-5 control-label">Select Destination</label>
+                                   
+                                   <div class="col-md-7"><!-- col-md-7 Begin -->
+                                       
+                                       <select name="destination" class="form-control" id="destination" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
+                                          
+                                           <option disabled selected>Select Destination</option>
                                            <option>Nairobi</option>
                                            <option>Western</option>
                                            <option>Coast</option>
@@ -145,18 +164,54 @@
                                        </select><!-- form-control Finish -->
                                        
                                    </div><!-- col-md-7 Finish -->
-                               </div><!-- form-group Finish -->
-                               <!-- <style>
+                               </div><!-- form-group Finish --> 
+                               <div class="form-group"><!-- form-group Begin -->
+                                   <label for="" class="col-md-5 control-label">Select delivery date</label>
+                                   
+                                   <div class="col-md-7"><!-- col-md-7 Begin -->
+                                          <input type = "date" name="date" id="date" class="form-control"><!-- select Begin -->
+                                          
+                                    </div><!-- col-md-7 Finish -->
+                                   
+                               </div><!-- form-group Finish -->       
+                              <h2> <p onclick="hello()" > show total</p>  </h2>
+                               <style>
                                     #hide {
                                         display: none;
                                     }
-                            </style> -->
+                                    
+                            </style>
+                            <script>
+                                 function hello(original){
+                                // alert(b4);
+                                    // origin = document.getElementById("origin").value
+                                    // destination = document.getElementById("destination").value
+                                    // date = getElementById("date").value
+                                    // if(origin == 1 && destination == 1){
+                                    //     var new_charges = 200;
+                                    // }else if(origin == 1 && destination == 2){
+                                    //     var new_charges = 200;
+
+                                    // }
+                                    // add up yo the 16th ....
+                                    // var final_chargs = original + newcharges
+                                    // document.getElementById("total").innerHTML = final_chargs //updating the total
+
+
+                                    // document.getElementById("hide").style.display = "block";
+                                // document.getElementById("total"). = "block";
+
+    }
+                                
+
+</script>
                                
                              <div id="hide">
                                  <p class="price" id="total">ksh <?php print(total_price2()); ?> </p>
+                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p>
+
                              </div>
                                
-                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p>
                                
                            </form><!-- form-horizontal Finish -->
                            
@@ -288,13 +343,24 @@
 </html>
 
 <script>
-    document.getElementById("myDiv").style.display = "none";
-    function showTotal(b4){
-        alert(b4);
-        document.getElementById("myDiv").style.display = "block";
+    // document.getElementById("myDiv").style.display = "none";
+    document.addEventListener('DOMContentLoaded', function() {
+  // Your code here
+  console.log('The DOM has loaded.');
+  function hello(){
+        // alert(b4);
+        $origin = document.getElementById("origin").value
+        $destination = document.getElementById("destination").value
+        $date = getElementById("date").value
+
+        document.getElementById("hide").style.display = "block";
         // document.getElementById("total"). = "block";
 
     }
+});
+
+    
+   
 
 </script>
 
