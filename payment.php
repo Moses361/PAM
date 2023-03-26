@@ -44,7 +44,7 @@ class MpesaApi
 		$this->tockenString      = "";
 		$this->url  			 = "";
 		// $date = DateTime::createFromFormat('YmdGisu', $this->Timestamp);
-		// echo date('Y-m-d H:i:s');
+		echo date('Y-m-d H:i:s');
         // $milliseconds = $this->Timestamp;
 		// $seconds = (int) ($milliseconds / 1000); // convert milliseconds to seconds
 		// $date = date('Y-m-d H:i:s', strtotime("1970-01-01 +$seconds seconds")); // convert seconds to Unix timestamp and format date
@@ -68,7 +68,7 @@ class MpesaApi
 		$this->response   		= curl_exec($this->curl);
 		$this->accessToken   	= json_decode($this->response);
 		
-		$this->tockenString  = $this->accessToken->access_token;
+		$this->tockenString  = @$this->accessToken->access_token;
         // print_r($this->accessToken);
         // die();
 		return $this->tockenString;

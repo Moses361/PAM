@@ -1,6 +1,9 @@
 <?php 
      $active='SHOPPING CART';
     include("includes/header.php");
+    // print_r($_SESSION);
+
+    // die();
 
     $intiator = trim($_SESSION['customer_email']);
     // print($intiator);
@@ -42,12 +45,10 @@
     
        <div class="box"><!--box   begin-->
        
-           <form action="cart.php" method="post" enctype="multipart/form-data"><!--form   begin -->
+        <form action="cart.php" method="post" enctype="multipart/form-data"><!--form   begin -->
            
                <h1>Order Request</h1>
-
-                <?php 
-                
+                <?php                 
                   $ip_add = getRealIpUser();
                   $select_cart = "select * from cart where ip_add='$ip_add'";
                   $run_cart = mysqli_query($con,$select_cart );
@@ -61,8 +62,7 @@
                 <table class="table"><!--table   begin -->
                  
                     <thead>
-                       <tr><!--tr   begin -->
-                       
+                       <tr><!--tr   begin -->                       
                            <th colspan="2">Service</th>
                            <th>Quantity</th>
                            <th>Unit Price</th>

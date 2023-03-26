@@ -7,10 +7,11 @@
 // }
 
 
-function create_order($customer, $order_id, $amount) {
+function create_order($customer, $order_id, $amount, $origin, $destination) {
     $con = mysqli_connect ("localhost","colls","1234","pam");
     $payment_status = "pending";
-    $insert_order = "INSERT INTO orders (customer, order_id, payment_status, amount) VALUES ('$customer', '$order_id', '$payment_status', '$amount')";
+    $order_date =  date('Y-m-d H:i:s');
+    $insert_order = "INSERT INTO orders (customer, order_id, payment_status, amount, origin, destination, order_date) VALUES ('$customer', '$order_id', '$payment_status', '$amount', '$origin', '$destination', '$order_date')";
     $run_order = mysqli_query($con, $insert_order);
 
     if ($run_order) {
@@ -35,6 +36,29 @@ function update_payment_status($con, $order_id, $status) {
     }
 }
 
+
+//get origin and destintaion 
+function getLocationName($locationId) {
+    switch ($locationId) {
+      case 1:
+        return "Nairobi";
+        break;
+      case 2:
+        return "Western";
+        break;
+      case 3:
+        return "Coast";
+        break;
+      case 4:
+        return "Rift valley";
+        break;
+      case 5:
+        return "Nyanza";
+        break;
+      default:
+        return "";
+    }
+  }
 
 
 ?>

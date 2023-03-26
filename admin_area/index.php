@@ -232,6 +232,8 @@
                         
                         include("edit_manufacturer.php");
                         
+                }if(isset($_GET['view_refarals'])){                        
+                        include("referals.php");                        
                 }
         
                 ?>

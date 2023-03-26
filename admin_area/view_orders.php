@@ -42,10 +42,11 @@
                                 <th> Invoice No: </th>
                                 <!-- <th> Service  Name: </th> -->
                                 <!-- <th> Service Qty: </th> -->
-                                <!-- <th> Category: </th> -->
-                                <!-- <th> Order Date: </th> -->
+                                <th> origin: </th>
+                                <th> destination: </th>
                                 <th> Total Amount: </th>
                                 <th> Status: </th>
+                                <th> Date: </th>
                                 <th> Delete: </th>
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
@@ -67,6 +68,14 @@
                                     // $c_id = $row_order['customer_id'];
                                     
                                     $invoice_no = $row_order['order_id'];
+                                    // $origin       = $row_order['origin'];
+                                    // $destination  = $row_order['destination'];
+                                    $origin       = $row_order['origin'];
+                                    $destination  = $row_order['destination'];
+                                    $date = $row_order['order_date'];
+
+
+
                                     
                                     $amount = $row_order['amount'];
                                     
@@ -110,8 +119,13 @@
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $customer; ?> </td>
                                 <td> <?php echo $invoice_no; ?></td>
+                                <td> <?php echo $origin; ?></td>
+                                <td> <?php echo $destination; ?></td>
+
                                 <td> <?php echo $amount; ?> </td>
                                 <td> <?php echo $status; ?> </td>
+                                <td> <?php echo $date; ?> </td>
+
 
                               
                                 <td> 

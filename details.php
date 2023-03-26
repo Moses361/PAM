@@ -2,12 +2,56 @@
 
     $active='Cart';
     include("includes/header.php");
+    
     if(isset($_POST['addToCar'])){
+        session_start();
+        $_SESSION['carty'] = $_POST;
+        // print_r($_POST);
+        // die();
         add_cart(); 
 
     }
 
 ?>
+         <script>
+
+            function test(){
+                alert("hello")
+            }
+              document.addEventListener('DOMContentLoaded', function() {
+                                 function hello(original){
+                                    // alert("hello")
+                                    // return false
+                                // alert(b4);
+                                    origin = document.getElementById("origin").value
+                                    destination = document.getElementById("destination").value
+                                    // alert("ogrigin"+origin+"destination"+destination)
+                                    // date = getElementById("date").value
+                                    if(origin == 1 && destination == 1){
+                                        var new_charges = 200;
+                                    }else if(origin == 1 && destination == 2){
+                                        var new_charges = 200;
+                                    }else{
+                                        var new_charges = 500;
+
+                                    }
+                                    // add up yo the 16th ....
+                                    var final_chargs = original + newcharges
+                                    document.getElementById("total").innerHTML = final_chargs //updating the total
+
+
+                                    document.getElementById("hide").style.display = "block";
+
+                                document.getElementById("total"). = "block";
+                                    alert(new_charges);
+                                    
+
+    }
+});
+
+                                
+
+</script>
    
    <div id="content"><!-- #content Begin -->
        <div class="container"><!-- container Begin -->
@@ -61,8 +105,7 @@
                                    <div class="item">
                                        <center><img class="img-responsive" src="admin_area/product_images/<?php echo $pro_img3; ?>" alt="Product 3-c"></center>
                                    </div>
-                               </div>
-                               
+                               </div>                               
                                <a href="#myCarousel" class="left carousel-control" data-slide="prev"><!-- left carousel-control Begin -->
                                    <span class="glyphicon glyphicon-chevron-left"></span>
                                    <span class="sr-only">Previous</span>
@@ -84,8 +127,8 @@
                            
                            <?php
                             // if(!empty($_GET['add_cart'])  && !empty($_POST['product_qty']) && !empty($_POST['product_size'])){
-                                $total = total_price2();
-                            add_cart($total); 
+                            //     $total = total_price2();
+                            // add_cart($total); 
                             // $_SESSION['new_total'] = get_total();
 
                             // }
@@ -134,13 +177,12 @@
                                        
                                        <select name="origin" id="origin" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
                                           
-                                           <option disabled selected>Select Origin </option>
-                                           <option value = 1 >Nairobi</option>
-                                           <option>Western</option>
-                                           <option>Coast</option>
-                                           <option>Rift valley</option>
-                                           <option>Nyanza</option>
-                                           
+                                           <!-- <option disabled selected>Select Origin </option> -->
+                                           <option value = "1">Nairobi</option>
+                                           <option value = "2">Western</option>
+                                           <option value = "3">Coast</option>
+                                           <option value = "4">Rift valley</option>
+                                           <option value = "4">Nyanza</option>                                           
                                            
                                        </select><!-- form-control Finish -->
                                        
@@ -151,15 +193,12 @@
                                    
                                    <div class="col-md-7"><!-- col-md-7 Begin -->
                                        
-                                       <select name="destination" class="form-control" id="destination" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
-                                          
-                                           <option disabled selected>Select Destination</option>
-                                           <option>Nairobi</option>
-                                           <option>Western</option>
-                                           <option>Coast</option>
-                                           <option>Rift valley</option>
-                                           <option>Nyanza</option>
-                                           
+                                       <select name="destination" class="form-control" id="destination" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')">                                           <!-- <option disabled selected>Select Destination</option> -->
+                                           <option value = "1">Nairobi</option>
+                                           <option value = "2">Western</option>
+                                           <option value = "3">Coast</option>
+                                           <option value = "4">Rift valley</option>
+                                           <option value = "4">Nyanza</option>                                          
                                            
                                        </select><!-- form-control Finish -->
                                        
@@ -174,41 +213,18 @@
                                     </div><!-- col-md-7 Finish -->
                                    
                                </div><!-- form-group Finish -->       
-                              <h2> <p onclick="hello()" > show total</p>  </h2>
+                              <h2> <p> *NB charges will be billed based on location </p></h2>
                                <style>
-                                    #hide {
+                                    /* #hide {
                                         display: none;
-                                    }
+                                    } */
                                     
                             </style>
-                            <script>
-                                 function hello(original){
-                                // alert(b4);
-                                    // origin = document.getElementById("origin").value
-                                    // destination = document.getElementById("destination").value
-                                    // date = getElementById("date").value
-                                    // if(origin == 1 && destination == 1){
-                                    //     var new_charges = 200;
-                                    // }else if(origin == 1 && destination == 2){
-                                    //     var new_charges = 200;
-
-                                    // }
-                                    // add up yo the 16th ....
-                                    // var final_chargs = original + newcharges
-                                    // document.getElementById("total").innerHTML = final_chargs //updating the total
-
-
-                                    // document.getElementById("hide").style.display = "block";
-                                // document.getElementById("total"). = "block";
-
-    }
-                                
-
-</script>
+                   
                                
                              <div id="hide">
                                  <p class="price" id="total">ksh <?php print(total_price2()); ?> </p>
-                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p>
+                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart" type="submit" > Add to cart</button></p>
 
                              </div>
                                
@@ -345,18 +361,19 @@
 <script>
     // document.getElementById("myDiv").style.display = "none";
     document.addEventListener('DOMContentLoaded', function() {
-  // Your code here
-  console.log('The DOM has loaded.');
-  function hello(){
-        // alert(b4);
-        $origin = document.getElementById("origin").value
-        $destination = document.getElementById("destination").value
-        $date = getElementById("date").value
+        console.log("all is workig ..")
 
-        document.getElementById("hide").style.display = "block";
-        // document.getElementById("total"). = "block";
+        const showTotalButton = document.querySelector("#showTotal");
 
-    }
+        showTotalButton.addEventListener("click", function() {
+        alert("Welcome!");
+        });
+
+        function test(){
+            alert("hello");
+        }
+
+                                    
 });
 
     

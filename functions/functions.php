@@ -25,6 +25,9 @@ function add_cart($total){
     
     global $db;
     
+if($total == 1){
+
+}else{
     if(isset($_GET['add_cart'])){
 
         
@@ -58,6 +61,7 @@ function add_cart($total){
         
     }
     
+}
 }
 
 /// finish add_cart function///
