@@ -68,23 +68,19 @@
                              
                             
                              $get_products = "SELECT  * FROM referals WHERE initiator   = ' $intiator';";
-                             $run_products = mysqli_query($con,$get_products);
-
-                            //  print($intiator1);
-                            //  print_r($run_products);
+                             $run_products = mysqli_query($con,$get_products);                         
 
                              
-                             while($row_products = mysqli_fetch_array($run_products)){
-                                print($date);
-                                 $product_title = $row_products['date'];
-                                 $intiator2 = $row_products['initiator'];
-                                 $link_code = $row_products['link_code'];
-                                 $discount = $row_products['discount'];
+                             while($test = mysqli_fetch_array($run_cart)){
+                                 $product_title = $test['date'];
+                                 $intiator2 = $test['initiator'];
+                                 $link_code = $test['link_code'];
+                                 $discount = $test['discount'];
+
 
         
                       ?>
-                    
-                       <tr><!--tr   begin-->
+                        <tr><!--tr   begin-->
                           
                           <td>
                               <a href="details.php?pro_id=<?php echo $pro_id; ?>"> <?php echo $product_title; ?></a>
@@ -100,23 +96,24 @@
                           </td>
                          
                        </tr><!--tr   Finish -->
+                    
+                      
                        <?php 
                        
                              }
                           
                        
                        ?>
+                       
                     
                     </tbody><!--tbody   Finish -->
                      
                      
                     <tfoot><!--tfoot   begin -->
                       <tr>
-                        <!-- <th colspan="5">Total</th>
                         
                       </tr>
                       
-                    </tfoot><!--tfoot   Finish -->
                 
                 </table><!--table   Finish -->
 

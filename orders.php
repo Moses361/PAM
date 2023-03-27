@@ -11,19 +11,28 @@ include_once 'Functions.php';
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
-
     if(isset($_POST['checkout'])){
         $amount = $_POST["amount"];
         $phone = $_POST["phone"];
+        $origin = getLocationName($_POST["origin"]);
+        $destination = getLocationName($_POST["destination"]);
+        $order_date = $_POST["order_date"];
+
+
+        
+
+      
         // // start testing 
         // /*
         // create order 
         $total = total_price();
-        $order_id = mt_rand(1000, 9999);
-        $id = create_order($_SESSION['customer_email'], $order_id, $total );   
+        $o_id  = rand(100000,999999);
+        $id = create_order($_SESSION['customer_email'], $o_id, $total, $origin, $destination, $order_date); 
+        
+        // print($id);
+        // die();
         $mpesa = new MpesaApi($id);
-        $token = $mpesa->get_access_tocken();
-     
+        $token = $mpesa->get_access_tocken();  
     
     
         // */
@@ -96,6 +105,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                         <th>orderID</th>
                         <th>status</th>
                         <th>Amount</th>
+                        <th>origin</th>
+                        <th>destination</th>
+                        <th>order_date</th>
+
+
+                        
                         
                     </tr><!--tr   finish -->
                  
@@ -116,6 +131,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                               $oId = $row_products['order_id'];
                               $status = $row_products['payment_status'];
                               $amount = $row_products['amount'];
+                              $origin = $row_products['origin'];
+                              $destination = $row_products['destination'];
+                              $order_date = $row_products['order_date'];
+
+
 
      
                    ?>
@@ -131,6 +151,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                        </td>
                        <td>
                            <?php echo $amount; ?>
+                       </td>
+
+                       <td>
+                           <?php echo $origin; ?>
+                       </td>
+                       <td>
+                           <?php echo $destination; ?>
+                       </td>
+                       <td>
+                           <?php echo $order_date; ?>
                        </td>
                        
                       

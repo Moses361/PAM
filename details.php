@@ -136,60 +136,29 @@
                                    </div><!-- col-md-7 Finish -->
                                </div><!-- form-group Finish -->
                                <div class="form-group"><!-- form-group Begin -->
-                                   <label class="col-md-5 control-label">Origin/pick up point</label>
-                                   
-                                   <div class="col-md-7"><!-- col-md-7 Begin -->
-                                       
-                                       <select name="product_size" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
-                                          
-                                           <option disabled selected>Select Delivery Point</option>
-                                           <option>Nairobi</option>
-                                           <option>Thika</option>
-                                           <option>Nakuru</option>
-                                           <option>Kisumu</option>
-                                           <option>Muranga</option>
-                                           <option>Homabay</option>
-                                           <option>Nyeri</option>
-                                           <option>Kajiado</option>
-                                           
-                                           
-                                       </select><!-- form-control Finish -->
-                                       
-                                   </div><!-- col-md-7 Finish -->
+                                  
                                </div><!-- form-group Finish -->
+                               
                                <div class="form-group"><!-- form-group Begin -->
-                                   <label class="col-md-5 control-label">Delivery Point</label>
+                                  
+                               </div><!-- form-group Finish --> 
+                               <div class="form-group"><!-- form-group Begin -->
                                    
-                                   <div class="col-md-7"><!-- col-md-7 Begin -->
-                                       
-                                       <select name="product_size" class="form-control" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')"><!-- form-control Begin -->
-                                          
-                                           <option disabled selected>Select Delivery Point</option>
-                                           <option>Nairobi</option>
-                                           <option>Thika</option>
-                                           <option>Nakuru</option>
-                                           <option>Kisumu</option>
-                                           <option>Muranga</option>
-                                           <option>Homabay</option>
-                                           <option>Nyeri</option>
-                                           <option>Kajiado</option>
-                                           
-                                           
-                                       </select><!-- form-control Finish -->
-                                       
-                                   </div><!-- col-md-7 Finish -->
-                               </div><!-- form-group Finish -->
-                               <!-- <style>
-                                    #hide {
-                                        display: none;
-                                    }
-                            </style> -->
+                                   <div class="col-md-7">
+</div>
+
+                                   
+                               </div><!-- form-group Finish -->       
+                               <style>                               
+                                    
+                            </style>
+                           
                                
-                             <div id="hide">
                                  <p class="price" id="total">ksh <?php print($price); ?> </p>
-                             </div>
+                               <!-- <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p> -->
+
                                
-                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-book" name="addToCart"> Order</button></p>
+                               <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" name="addToCart"> Add to cart</button></p>
                                
                            </form><!-- form-horizontal Finish -->
                            
@@ -300,13 +269,24 @@
 </html>
 
 <script>
-    document.getElementById("myDiv").style.display = "none";
-    function showTotal(b4){
-        alert(b4);
-        document.getElementById("myDiv").style.display = "block";
+    // document.getElementById("myDiv").style.display = "none";
+    document.addEventListener('DOMContentLoaded', function() {
+  // Your code here
+  console.log('The DOM has loaded.');
+  function hello(){
+        // alert(b4);
+        $origin = document.getElementById("origin").value
+        $destination = document.getElementById("destination").value
+        $date = getElementById("date").value
+
+        document.getElementById("hide").style.display = "block";
         // document.getElementById("total"). = "block";
 
     }
+});
+
+    
+   
 
 </script>
 

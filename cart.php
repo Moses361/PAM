@@ -3,6 +3,24 @@
     //  date_default_timezone_set('UTC');
     include("includes/header.php");
 
+    $intiator = trim($_SESSION['customer_email']);
+    // print($intiator);
+    // if(trim($intiator)== "moses@gmail.com"){
+    //     print("holla");
+    // }else{
+    //     print("dye");
+    // }
+
+    $select_cart = "SELECT  * from referals where initiator  ='$intiator';";
+    $run_cart2 = mysqli_query($con,$select_cart );
+    $count2 = mysqli_num_rows($run_cart2);
+    $discount = $count2 * 200;
+
+    // print_r($discount);
+
+
+    // die();
+
 
 ?>
 
@@ -23,9 +41,9 @@
 
     <div id="cart" class="col-md-9" ><!--cart col-md-9   begin-->
     
-       <div class="box"><!--box   begin-->
+       <div class="box" ><!--box   begin-->
        
-           <form action="cart.php" method="post" enctype="multipart/form-data"><!--form   begin -->
+           <form action="cart.php" method="post" enctype="multipart/form-data" id="orderForm"><!--form   begin -->
            
                <h1>Order Request</h1>
 
@@ -111,8 +129,33 @@
                      
                     <tfoot><!--tfoot   begin -->
                       <tr>
-                        <th colspan="5">Total</th>
+                        <th colspan="5">Sub Total</th>
                         <th colspan="2">Ksh.<?php echo $total; ?></th>
+                        
+                        
+                      </tr>
+                      <tr>
+                        <?php 
+                         $intiator = trim($_SESSION['customer_email']);
+                         $select_cart2 = "select * from referals where initiator ='$intiator'";
+                         $run_cart2 = mysqli_query($con,$select_cart2);
+                         $count2 = mysqli_num_rows($run_cart2);
+                        //  print("hello");
+                        //  print($count);  
+                         
+                         
+                        //  die();
+
+
+
+                        ?>
+                         <th colspan="5">Discount</th>
+                        <th colspan="2">Ksh.<?php print($discount);?></th>
+                        </tr>
+                        <tr>
+                            <th colspan="5">Total</th>
+                            <th colspan="2">Ksh.<?php echo $total - $discount; ?></th>
+                        
                         
                       </tr>
                       
@@ -121,7 +164,7 @@
                 </table><!--table   Finish -->
 
                </div><!--table-responsive   Finish -->
-               <div class="box-footer"><!--box-footer  begin -->
+               <div class="box-footer" id="orderOptions"><!--box-footer  begin -->
                
                   <div class="pull-left"><!--pull-left begin -->
                   
@@ -327,8 +370,22 @@
 
   // Function to print the table
   function printTable() {
-    window.print();
+    // window.print();
+    printPageArea("orderForm");
+
   }
+
+  // print only a section of a page
+  function printPageArea(areaID){
+    var printContent = document.getElementById(areaID).innerHTML;
+    var originalContent = document.body.innerHTML;
+    document.body.innerHTML = printContent;
+    var orderOptions = document.getElementById("orderOptions");
+    orderOptions.style.display = "none"; // hide order options while printing report
+    window.print();
+    // orderOptions.style.display = "block"; // show order options back
+    document.body.innerHTML = originalContent;
+}
 
   // Function to download the table as CSV
   function downloadTable() {

@@ -40,7 +40,7 @@
         
         $check_cart = mysqli_num_rows($run_cart);
         $datet = date('Y-m-d H:i:s');
-        $discount = 100;
+        $discount = 200;
         // update referal 
         $insert_customer2 = "insert into referals (date, initiator, username, link_code, discount) values ('$datet','$ref','$c_email','$c_email','$discount')";    
         $run_customer = mysqli_query($con,$insert_customer2);
