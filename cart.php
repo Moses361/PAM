@@ -68,8 +68,10 @@
                            <th>Quantity</th>
                            <th>Unit Price</th>
                            <th>Category</th>
+                           <th>Location</th>
+                           <th>Date</th>
                            <th colspan="1">Delete</th>
-                           <th colspan="2">Sub-Total</th>
+                           <th colspan="1">Sub-Total</th>
                        
                        </tr><!--tr   finish -->
                     
@@ -112,6 +114,23 @@
                               <?php echo $pro_size; ?>
                           </td>
                           <td>
+                            <label for="source">Origin: </label>
+                             <select name="source" id="source">
+                                <option value="">-- Select Origin --</option>
+                                <option value="">Nairobi</option>
+                             </select>
+                             <!-- destination -->
+                             <label for="destination">Destination</label>
+                             <select name="destination" id="destination">
+                                <option value="">-- Select Destination --</option>
+                                <option value="">Nyeri</option>
+                             </select>
+
+                          </td>
+                          <td>
+                              <input type="date" name="orderDate" id="orderDate" style="width: 110px">
+                          </td>
+                          <td>
                               <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
                           </td>
                           <td>
@@ -130,7 +149,7 @@
                     <tfoot><!--tfoot   begin -->
                       <tr>
                         <th colspan="5">Sub Total</th>
-                        <th colspan="2">Ksh.<?php echo $total; ?></th>
+                        <th colspan="2" id="subTotal">Ksh.<?php echo $total; ?></th>
                         
                         
                       </tr>
@@ -150,11 +169,11 @@
 
                         ?>
                          <th colspan="5">Discount</th>
-                        <th colspan="2">Ksh.<?php print($discount);?></th>
+                        <th colspan="2" id="discount">Ksh.<?php print($discount);?></th>
                         </tr>
                         <tr>
                             <th colspan="5">Total</th>
-                            <th colspan="2">Ksh.<?php echo $total - $discount; ?></th>
+                            <th colspan="2" id="total">Ksh.<?php echo $total - $discount; ?></th>
                         
                         
                       </tr>
@@ -416,4 +435,98 @@
 
   var downloadBtn = document.getElementById('downloadBtn');
   downloadBtn.addEventListener('click', downloadTable);
+
+  
+  // disable selection of dates before current date
+  const today = new Date().toISOString().split('T')[0];
+  const dateElement = document.getElementById("orderDate");
+  const source  = document.getElementById("source");
+  const destination = document.getElementById("destination");
+  const subTotal = document.getElementById("subTotal");
+  const discount = document.getElementById("discount");
+  const total = document.getElementById("total");
+
+  dateElement.setAttribute("min", today);
+  // listen when =user selects a different date
+  dateElement.addEventListener("change", function() {
+  const selectedDate = new Date(this.value);
+  const now = new Date();
+  if (selectedDate < now) {
+    this.value = today;
+  }
+});
+
+// laod cities and fill in the options
+let cities = {}; // gloabal variable to store all cities data
+let pricePerKm = 3;
+(async function init(){
+  const data = await fetch("cities.json").then(res=>res.json()).then(data=>data);
+  cities = data;
+
+  generateOptions() // generate dropdown options
+// console.log("Distance", getDistance("Nairobi", "Mombasa"))
+source.addEventListener("change", () => calculatePrice());
+destination.addEventListener("change", () => calculatePrice());
+
+})();
+
+
+// get distance between two towns (In km)
+function getDistance(src, dst){
+  const radius = 6371; // Earth's radius in kilometers
+  const townA = getCoords(src);
+  const townB = getCoords(dst);
+
+  const lat1 = townA.lat * Math.PI / 180;
+  const lat2 = townB.lat * Math.PI / 180;
+  const lon1 = townA.lng * Math.PI / 180;
+  const lon2 = townB.lng * Math.PI / 180;
+  const dLat = lat2 - lat1; // difference in latitudes
+  const dLon = lon2 - lon1; // difference in longitutes
+
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1) * Math.cos(lat2) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distance = radius * c;
+  return parseInt(distance);
+}
+
+// return latitude and longitude for a city
+function getCoords(cityName)
+{
+  for(let i in cities){
+    let city = cities[i];
+    if(city.city == cityName){
+      return {
+          lat: city.lat,
+          lng: city.lng
+      }
+    }
+  }
+}
+
+// fill in cities as dropdown options
+function generateOptions(){
+let options = ``;
+for(let i in cities){
+    let city = cities[i];
+   options += `<option value="${city.city}">${city.city}</option>`
+}
+source.innerHTML = options;
+destination.innerHTML = options;
+}
+
+// re-calcuate price on route change
+function calculatePrice(){
+    const src = source.value;
+    const dst = destination.value;
+    const distance = getDistance(src, dst);
+    const price = pricePerKm * distance;
+
+    subTotal.innerHTML = "Ksh. "+price;
+
+} 
+
 </script>
