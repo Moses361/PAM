@@ -3,6 +3,9 @@
    */
   /* General Styles */
 
+  :root{
+    --color-primary: rgb(79, 191, 168);
+  }
 body{
     font-size: 14px;
     line-height: 1.42857143;
