@@ -115,13 +115,13 @@
                           </td>
                           <td>
                             <label for="source">Origin: </label>
-                             <select name="source" id="source">
+                             <select name="source" class="source">
                                 <option value="">-- Select Origin --</option>
                                 <option value="">Nairobi</option>
                              </select>
                              <!-- destination -->
                              <label for="destination">Destination</label>
-                             <select name="destination" id="destination">
+                             <select name="destination" class="destination">
                                 <option value="">-- Select Destination --</option>
                                 <option value="">Nyeri</option>
                              </select>
@@ -440,8 +440,8 @@
   // disable selection of dates before current date
   const today = new Date().toISOString().split('T')[0];
   const dateElement = document.getElementById("orderDate");
-  const source  = document.getElementById("source");
-  const destination = document.getElementById("destination");
+  const sources  = document.querySelectorAll(".source");
+  const destinations = document.querySelectorAll(".destination");
   const subTotal = document.getElementById("subTotal");
   const discount = document.getElementById("discount");
   const total = document.getElementById("total");
@@ -465,8 +465,8 @@ let pricePerKm = 3;
 
   generateOptions() // generate dropdown options
 // console.log("Distance", getDistance("Nairobi", "Mombasa"))
-source.addEventListener("change", () => calculatePrice());
-destination.addEventListener("change", () => calculatePrice());
+sources.forEach(source=> source.addEventListener("change", () => calculatePrice()))
+destinations.forEach(destination => destination.addEventListener("change", () => calculatePrice()));
 
 })();
 
@@ -514,16 +514,25 @@ for(let i in cities){
     let city = cities[i];
    options += `<option value="${city.city}">${city.city}</option>`
 }
-source.innerHTML = options;
-destination.innerHTML = options;
+// origins
+for(let i=0; i<sources.length; i++){
+  sources[i].innerHTML = options;
+}
+// destinations 
+for(let i=0; i<destinations.length; i++){
+  destinations[i].innerHTML = options;
+}
 }
 
 // re-calcuate price on route change
 function calculatePrice(){
-    const src = source.value;
-    const dst = destination.value;
+  let price=0;
+  for(let i=0; i<sources.length; i++){
+    const src = sources[i].value;
+    const dst = destinations[i].value;
     const distance = getDistance(src, dst);
-    const price = pricePerKm * distance;
+    price += pricePerKm * distance;
+  }
 
     subTotal.innerHTML = "Ksh. "+price;
 
