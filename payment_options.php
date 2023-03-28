@@ -125,7 +125,7 @@ $(document).ready(function() {
     ?>
    
 
-    <h1 class="text-center">Payment Options For You</h1>  
+    <h1 class="text-center">Pay via M-Pesa</h1>  
     
      <p class="lead text-center"><!-- lead text-center Begin -->
          
@@ -136,51 +136,24 @@ $(document).ready(function() {
      <center>
      
          <p class="lead">
-     
-             <a href="#">
-             
                 <!-- Paypal Payment -->
 
                 <!-- <img  class="img-responsive" src="images/paypal_img.png" alt="img_paypal"> -->
                 <form action="orders.php" class="form-login" method="post"><!-- form-login begin -->
-                            <h2 class="form-login-heading"> complete payment</h2>                            
+                            <h2 class="form-login-heading  btn-primary py-3"> Complete Payment</h2>                            
                             <input type="hidden" class="form-control" placeholder="amount" name="amount" required="" readonly="" value="<?php print(total_price2()) ?>">   <br>                         
-                            <input type="text" class="form-control" placeholder="Enter phone number for payment" name="phone" required=""><br> 
-                            <select name="origin" id="origin" class="form-control" required="">                                          
-                                          <option value = "1">Nairobi</option>
-                                          <option value = "2">Western</option>
-                                          <option value = "3">Coast</option>
-                                          <option value = "4">Rift valley</option>
-                                          <option value = "4">Nyanza</option>                                         
-                                          
-                            </select><!-- form-control Finish --><br>
-                            <select name="destination" class="form-control" id="destination" required oninput="setCustomValidity('')" oninvalid="setCustomValidity('Must pick 1 size for the product')">                                           <!-- <option disabled selected>Select Destination</option> -->
-                                           <option value = "1">Nairobi</option>
-                                           <option value = "2">Western</option>
-                                           <option value = "3">Coast</option>
-                                           <option value = "4">Rift valley</option>
-                                           <option value = "4">Nyanza</option>                                          
-                                           
-                            </select><br><!-- form-control Finish -->
-                            <input type="date" name="order_date" class="form-control" placeholder="Enter service date"  required=""><br> 
-
-                            <button type="submit" class="btn btn-lg btn-primary btn-block" name="checkout" id="show">                           
-                                show total
-                                
-                             </button><!-- btn btn-lg btn-primary btn-block finish -->
-                            
+                            <input type="text" class="form-control" placeholder="Enter your M-Pesa number" name="phone" required=""><br> 
+                            <div class="d-flex justify-content-around" style="display: flex; justify-content: space-between; width: 100%; padding: 20px 10px;">
+                              <button type="submit" class="btn btn-lg btn-warning" name="checkout" id="goBack" onclick="history.back()">                           
+                                  Go Back
+                              </button><!-- btn btn-lg btn-primary btn-block finish -->   
+                              <button type="submit" class="btn btn-lg btn-primary" name="checkout" id="show">                           
+                                  Pay
+                              </button><!-- btn btn-lg btn-primary btn-block finish --> 
+                            </div>
                             
 
-                            <button type="submit" class="btn btn-lg btn-primary btn-block" name="checkout" id="pay">                           
-                                Pay
-                                
-                             </button><!-- btn btn-lg btn-primary btn-block finish -->
-                             <h2 id="final" ></h2>
-           
                  </form><!-- form-login finish -->
-             
-             </a>
-     
          </p>  
      
      </center>
