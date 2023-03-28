@@ -147,11 +147,11 @@ $(document).ready(function() {
                               <button type="submit" class="btn btn-lg btn-warning" name="checkout" id="goBack" onclick="history.back()">                           
                                   Go Back
                               </button><!-- btn btn-lg btn-primary btn-block finish -->   
-                              <button type="submit" class="btn btn-lg btn-primary" name="checkout" id="show">                           
+                             
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary" name="checkout" id="show">                           
                                   Pay
                               </button><!-- btn btn-lg btn-primary btn-block finish --> 
-                            </div>
-                            
 
                  </form><!-- form-login finish -->
          </p>  
