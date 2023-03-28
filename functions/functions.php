@@ -24,9 +24,7 @@ function getRealIpUser(){
 function add_cart($total){
     
     global $db;
-    
     if(isset($_GET['add_cart'])){
-
         
         
         $ip_add = getRealIpUser();
@@ -40,9 +38,9 @@ function add_cart($total){
         $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
         
         $run_check = mysqli_query($db,$check_product);
-        
+    
         if(mysqli_num_rows($run_check)>0){
-            
+        
             echo "<script>alert('This product has already been added to cart')</script>";
             echo "<script>window.open('details.php?pro_id=$p_id','_self')</script>";
             
@@ -57,7 +55,6 @@ function add_cart($total){
         }
         
     }
-    
 }
 
 /// finish add_cart function///
@@ -321,10 +318,12 @@ function total_price2(){
     $total = 0;
     $select_cart = "select * from cart where ip_add='$ip_add'";
     $run_cart = mysqli_query($db, $select_cart);
+    $transport_cost = 0;//
     while($record=mysqli_fetch_array($run_cart)){
  
          $pro_id = $record['p_id'];
          $pro_qty = $record['qty'];
+         $transport_cost += $record['transport_cost'];
          $get_price = "select * from products where product_id='$pro_id'";
          $run_price = mysqli_query($db,$get_price );
          while($row_price=mysqli_fetch_array($run_price)){
@@ -336,7 +335,7 @@ function total_price2(){
  
     } 
     //   echo $total;
-      return $total;
+      return $total+$transport_cost;
     
  
  
