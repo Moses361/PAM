@@ -128,7 +128,7 @@
 
                           </td>
                           <td>
-                              <input type="date" name="orderDate" id="orderDate" style="width: 110px">
+                              <input type="date" name="orderDate" class="orderDate" style="width: 110px">
                           </td>
                           <td>
                               <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
@@ -439,23 +439,25 @@
   
   // disable selection of dates before current date
   const today = new Date().toISOString().split('T')[0];
-  const dateElement = document.getElementById("orderDate");
+  const dateElements = document.querySelectorAll(".orderDate");
   const sources  = document.querySelectorAll(".source");
   const destinations = document.querySelectorAll(".destination");
   const subTotal = document.getElementById("subTotal");
   const discount = document.getElementById("discount");
   const total = document.getElementById("total");
 
-  dateElement.setAttribute("min", today);
-  // listen when =user selects a different date
-  dateElement.addEventListener("change", function() {
-  const selectedDate = new Date(this.value);
-  const now = new Date();
-  if (selectedDate < now) {
-    this.value = today;
-  }
-});
-
+  dateElements.forEach(dateElement => {
+    dateElement.setAttribute("min", today);
+    // listen when =user selects a different date
+    dateElement.addEventListener("change", function() {
+        const selectedDate = new Date(this.value);
+        const now = new Date();
+        if (selectedDate < now) {
+          this.value = today;
+        }
+      });
+    })
+  
 // laod cities and fill in the options
 let cities = {}; // gloabal variable to store all cities data
 let pricePerKm = 3;
