@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     ?>
    
 
-    <h1 class="text-center">orders</h1>  
+    <h1 class="text-center">Orders</h1>  
     
      <p class="lead text-center"><!-- lead text-center Begin -->
          
@@ -88,26 +88,23 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
      <center>
      
          <p class="lead">
-     
-             <a href="#">
-             
                 <!-- Paypal Payment -->
 
                 <!-- <img  class="img-responsive" src="images/paypal_img.png" alt="img_paypal"> -->
                 <form action="" class="form-login" method="post"><!-- form-login begin -->
-                            <h2 class="form-login-heading"> refresh to update status</h2>  
+                            <h2 class="form-login-heading"> Refresh to update status</h2>  
                             <table class="table"><!--table   begin -->
                  <table  class="table" id="myTable">
                  <thead>
                     <tr><!--tr   begin -->
                     
-                        <th>name</th>
-                        <th>orderID</th>
-                        <th>status</th>
+                        <th>Name</th>
+                        <th>Order ID</th>
+                        <th>Status</th>
                         <th>Amount</th>
-                        <th>origin</th>
-                        <th>destination</th>
-                        <th>order_date</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Order Date</th>
 
 
                         
@@ -187,8 +184,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                              <button id="downloadBtn"  class="btn btn-lg btn-success">Download</button>
            
        </form><!-- form-login finish -->
-             
-             </a>
      
          </p>  
      
