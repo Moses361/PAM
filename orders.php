@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     </p>
 
-    <center>
+    <center id="orderSection">
 
         <p class="lead">
             <!-- Paypal Payment -->
@@ -184,10 +184,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 </table><!--table   Finish -->
 
-
-                <!-- <button id="printAndDownloadBtn" class="btn btn-lg btn-success ">Print and Download</button> -->
-                <button id="printBtn" class="btn btn-lg btn-success">Print</button>
-                <button id="downloadBtn" class="btn btn-lg btn-success">Download</button>
+                <div id="downloadOptions">
+                    <!-- <button id="printAndDownloadBtn" class="btn btn-lg btn-success ">Print and Download</button> -->
+                    <button id="printBtn" class="btn btn-lg btn-success">Print</button>
+                    <button id="downloadBtn" class="btn btn-lg btn-success">Download</button>
+                </div>
 
         </form><!-- form-login finish -->
 
@@ -206,31 +207,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Function to print the table
     function printTable() {
-        window.print();
+        printPageArea("orderSection");
     }
 
-    // Function to download the table as CSV
+    // Function to download the table as pdf
     function downloadTable() {
-        // Convert the table to CSV format
-        var csv = [];
-        for (var i = 0; i < table.rows.length; i++) {
-            var row = [];
-            for (var j = 0; j < table.rows[i].cells.length; j++) {
-                row.push(table.rows[i].cells[j].innerText);
-            }
-            csv.push(row.join(','));
-        }
-        csv = csv.join('\n');
-
-        // Create a download link and click it
-        var link = document.createElement('a');
-        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
-        link.setAttribute('download', 'myTable.csv');
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        printPageArea("orderSection");
     }
+
+    // print only a section of a page
+  function printPageArea(areaID) {
+    var printContent = document.getElementById(areaID).innerHTML;
+    var originalContent = document.body.innerHTML;
+    document.body.innerHTML = printContent;
+    var downloadOptions = document.getElementById("downloadOptions");
+    var heading = document.querySelector(".form-login-heading");
+    heading.innerText = "Order Summary";
+    downloadOptions.style.display = "none"; // hide order options while printing report
+    window.print();
+    // orderOptions.style.display = "block"; // show order options back
+    document.body.innerHTML = originalContent;
+  }
 
     // Attach click event listeners to the print and download buttons
     var printBtn = document.getElementById('printBtn');

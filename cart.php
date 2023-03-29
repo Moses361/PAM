@@ -408,25 +408,7 @@ include("includes/footer.php")
 
   // Function to download the table as CSV
   function downloadTable() {
-    // Convert the table to CSV format
-    var csv = [];
-    for (var i = 0; i < table.rows.length; i++) {
-      var row = [];
-      for (var j = 0; j < table.rows[i].cells.length; j++) {
-        row.push(table.rows[i].cells[j].innerText);
-      }
-      csv.push(row.join(','));
-    }
-    csv = csv.join('\n');
-
-    // Create a download link and click it
-    var link = document.createElement('a');
-    link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
-    link.setAttribute('download', 'myTable.csv');
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    printPageArea("orderForm");
   }
 
   // Attach click event listeners to the print and download buttons
