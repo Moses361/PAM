@@ -4,21 +4,11 @@ $active = 'SHOPPING CART';
 include("includes/header.php");
 
 $intiator = trim($_SESSION['customer_email']);
-// print($intiator);
-// if(trim($intiator)== "moses@gmail.com"){
-//     print("holla");
-// }else{
-//     print("dye");
-// }
 
-$select_cart = "SELECT  * from referals where initiator  ='$intiator';";
+$select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false;";
 $run_cart2 = mysqli_query($con, $select_cart);
 $count2 = mysqli_num_rows($run_cart2);
 $discount = $count2 * 200;
-
-// print_r($discount);
-
-
 // die();
 
 
@@ -141,7 +131,7 @@ $discount = $count2 * 200;
                         <?php echo $sub_total; ?>
                       </td>
                     </tr><!--tr   Finish -->
-                  <?php
+                    <?php
                   }
                 }
 
@@ -154,11 +144,11 @@ $discount = $count2 * 200;
                 <tr>
                   <th colspan="2">Sub Total</th>
                   <th></th> <!-- quantity - empty -->
-                  <th id="itemsTotal" data-value="<?=$total;?>">Ksh.
+                  <th id="itemsTotal" data-value="<?= $total; ?>">Ksh.
                     <?php echo $total; ?>
                   </th>
                   <th></th>
-                  <th id="deliveryTotal" data-value="<?=$tranport_cost;?>">Ksh. <?php echo $tranport_cost; ?></th>
+                  <th id="deliveryTotal" data-value="<?= $tranport_cost; ?>">Ksh. <?php echo $tranport_cost; ?></th>
                 </tr>
                 <tr>
                   <?php
@@ -176,14 +166,14 @@ $discount = $count2 * 200;
 
                   ?>
                   <th colspan="5">Discount</th>
-                  <th colspan="2" id="discount" data-value="<?=$discount;?>">Ksh.
+                  <th colspan="2" id="discount" data-value="<?= $discount; ?>">Ksh.
                     <?php print($discount); ?>
                   </th>
                 </tr>
                 <tr>
                   <th colspan="5">Total</th>
-                  <th colspan="2" id="total" data-value="<?php echo ($total - $discount)+$tranport_cost; ?>">Ksh.
-                    <?php echo ($total - $discount)+$tranport_cost; ?>
+                  <th colspan="2" id="total" data-value="<?php echo ($total - $discount) + $tranport_cost; ?>">Ksh.
+                    <?php echo ($total - $discount) + $tranport_cost; ?>
                   </th>
 
 
@@ -243,16 +233,11 @@ $discount = $count2 * 200;
             if ($run_delete) {
 
               echo "
-                          
-                             <script>window.open('cart.php','_self')</script>
-                          
-                          ";
-
+                  <script>window.open('cart.php','_self')</script>
+                  ";
             }
 
           }
-
-
         }
 
       }
@@ -260,7 +245,6 @@ $discount = $count2 * 200;
 
 
       @$up_cart = update_cart();
-
       ;
       ?>
 
@@ -462,7 +446,7 @@ include("includes/footer.php")
   const deliveryTotal = document.getElementById("deliveryTotal");
   const discount = document.getElementById("discount");
   const total = document.getElementById("total");
-  
+
 
   dateElements.forEach(dateElement => {
     dateElement.setAttribute("min", today);
@@ -560,18 +544,18 @@ include("includes/footer.php")
     let itemsPrice = parseFloat(itemsTotal.getAttribute("data-value"));
     let delivery = parseFloat(deliveryTotal.getAttribute("data-value"));
     let discountPrice = parseFloat(discount.getAttribute("data-value"));
-    
+
     deliveryTotal.innerHTML = "Ksh. " + price;
-    total.innerHTML = "Ksh. "+(itemsPrice+delivery-discountPrice)
+    total.innerHTML = "Ksh. " + (itemsPrice + delivery - discountPrice)
   }
 
   // function to update the transport cost of a certain product
   function updateTransportCost(productId, transportCost) {
     fetch("cartUtils.php", {
       method: "post",
-      body: JSON.stringify({productId,transportCost})
+      body: JSON.stringify({ productId, transportCost })
     }).then(res => res.json()).then(res => {
-        // console.log("response: ", res)
+      // console.log("response: ", res)
     })
 
   }
