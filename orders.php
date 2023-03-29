@@ -41,7 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // print($message);
         // die();
 
+        // order has been processed. Update referrals
+        $session_email = trim($_SESSION['customer_email']);
+        $sql = "UPDATE referals SET redeemed=true WHERE username='$session_email';";
+        $query = mysqli_query($con, $sql);
+        if (!$query){
+            die("Unable to update referrals: ".mysqli_error($con));
+        }
 
+        // Order has been successful. Delete shopping cart
+        $ip_add = getRealIpUser();
+        $sql = "DELETE FROM cart WHERE ip_add='$ip_add';";
+        $query = mysqli_query($con, $sql);
+        if (!$query){
+            die("Error clearing shopping cart: ".mysqli_error($con));
+        }
+        
     }
 
 }
