@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $phone = $_POST["phone"];
         $total = total_price();
         $ip_add = getRealIpUser();
-        $callback_url = $_POST['callback_url'];
         $o_id = rand(100000, 999999);
 
         // get all items in the shopping cart for this user
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // print($id);
         // die();
         $mpesa = new MpesaApi($id);
-        $mpesa->setCallBackUrl($callback_url);
+        // $mpesa->setCallBackUrl($callback_url);
         
         $token = $mpesa->get_access_tocken();
 
@@ -48,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // print($amount.":".$new_phone);
         $message = $mpesa->stk_push($token, $amount, $new_phone);
         // print($message);
-        // die();
+        $res = json_decode($message);
+        // die($res->CheckoutRequestID);
 
         // order has been processed. Update referrals
         $session_email = trim($_SESSION['customer_email']);

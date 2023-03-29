@@ -62,9 +62,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <!-- <img  class="img-responsive" src="images/paypal_img.png" alt="img_paypal"> -->
                 <form action="orders.php" class="form-login" method="post"><!-- form-login begin -->
                             <h2 class="form-login-heading h-100" style="background-color: gray; padding: 5px 0px;"> Complete Payment</h2>                            
-                            <input type="text" class="form-control" placeholder="amount" name="amount" required="" readonly="" value="<?php print(total_price2()) ?>">   <br>                         
+                            <input type="text" class="form-control" placeholder="amount" name="amount" required value="<?php print(total_price2()) ?>">   <br>                         
                             <input type="text" class="form-control" placeholder="Enter M-Pesa number to be billed" name="phone" required=""><br>
-                            
                             <div style="display: flex; justify-content: space-between; padding: 0px 20px;">
                               <button type="cancel" class="btn btn-lg btn-warning" name="goBack" onclick="history.back()"><!-- btn btn-lg btn-primary btn-block begin -->
                                   Go Back
