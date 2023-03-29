@@ -468,7 +468,7 @@ include("includes/footer.php")
     cities = data;
 
     generateOptions() // generate dropdown options
-    // console.log("Distance", getDistance("Nairobi", "Mombasa"))
+    calculatePrice();
     sources.forEach(source => source.addEventListener("change", () => calculatePrice()))
     destinations.forEach(destination => destination.addEventListener("change", () => calculatePrice()));
 
