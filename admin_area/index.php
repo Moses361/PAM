@@ -167,6 +167,10 @@
                 }   if(isset($_GET['view_orders'])){
                         
                         include("view_orders.php");
+
+                }   if(isset($_GET['view_referrals'])){
+                        
+                        include("view_referrals.php");
                         
                 }   if(isset($_GET['delete_order'])){
                         
