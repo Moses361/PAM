@@ -107,13 +107,13 @@ $discount = $count2 * 200;
                         <?php echo $pro_size; ?>
                       </td>
                       <td>
-                        <label for="source">Origin: </label>
+                        <label for="source" style="display: block;">Origin</label> 
                         <select name="source" class="source" data-id="<?php echo $pro_id; ?>">
                           <option value="">-- Select Origin --</option>
                           <option value="">Nairobi</option>
                         </select>
                         <!-- destination -->
-                        <label for="destination">Destination</label>
+                        <label for="destination" style="display: block;">Destination</label>
                         <select name="destination" class="destination" data-id="<?php echo $pro_id; ?>">
                           <option value="">-- Select Destination --</option>
                           <option value="">Nyeri</option>
