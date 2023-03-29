@@ -39,10 +39,10 @@
                             <tr><!-- tr begin -->
                                 <th> No: </th>
                                 <th>Initiator</th>
-                                <th>Date</th>
                                 <th>Link Code</th>
                                 <th>Discount</th>
                                 <th>Redeemed</th>
+                                <th>Date</th>
                         </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
                         
@@ -66,10 +66,10 @@
                             <tr><!-- tr begin -->
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $initiator; ?> </td>
-                                <td> <?php echo $date; ?></td>
                                 <td> <?php echo $link_code; ?></td>
                                 <td> <?php echo $discount; ?></td>
                                 <td> <?php echo (boolval($redeemed) == true) ? "<span style='color: red;'> Yes</span>" : "<span style='color: green;'> No</span>"; ?> </td>
+                                <td> <?php echo $date; ?></td>
                             </tr><!-- tr finish -->
                             <?php } ?>
                             
