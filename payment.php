@@ -1,6 +1,7 @@
 <?php
 class MpesaApi
 {
+	private $id;
 	private $url;
 	private $consumerKey;
 	private $consumerSecret;
@@ -22,6 +23,8 @@ class MpesaApi
 	private $tockenString;
 	public function __construct($id)
 	{
+		// product id
+		$this->id = $id;
 		// tocken requirements
 		$this->consumerKey     	 ="b5zUKrwKQ0uczvCzZQG2Kl72Scky9P0f";
 		$this->consumerSecret    ="ANoMXAaPCuHWFfdm";
@@ -104,6 +107,55 @@ class MpesaApi
 		$this->response       = curl_exec($this->curl);
 		
 		return $this->response;
+	}
+
+
+	public function setCallBackUrl($url)
+	{
+		$this->CallBackURL = $url."/PAM/mpesa/index.php?orderId=".$this->id;
+	}
+
+	public function verifyTransactionDetails($transactionID){
+		$access_token = $this->get_access_tocken();
+		$url = 'https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query';
+
+		$headers = [
+			'Authorization: Bearer ' . $access_token,
+			'Content-Type: application/json'
+		];
+		
+		$data = [
+			'Initiator' => $this->BusinessShortCode,
+			'SecurityCredential' => $this->PassKey,
+			'CommandID' => 'TransactionStatusQuery',
+			'TransactionID' => $transactionID,
+			'PartyA' => $this->PartyA,
+			'IdentifierType' => '4',
+			'ResultURL' => '',
+			'QueueTimeOutURL' => '',
+			'Remarks' => '',
+			'Occasion' => ''
+		];
+		
+		$data_string = json_encode($data);
+		
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+		
+		$result = curl_exec($ch);
+		$data = json_decode($result, true);
+		
+		$status = $data['Result']['ResultCode'];
+		
+		if ($status == 0) {
+			die('Transaction successful');
+		} else {
+			die('Transaction failed');
+		}
 	}
 }
 
