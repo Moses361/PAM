@@ -10,20 +10,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['checkout'])) {
         $amount = $_POST["amount"];
         $phone = $_POST["phone"];
-        $origin = getLocationName($_POST["origin"]);
-        $destination = getLocationName($_POST["destination"]);
-        $order_date = $_POST["order_date"];
-        
-        // // start testing 
-        // /*
-        // create order 
         $total = total_price();
+        $ip_add = getRealIpUser();
+        $callback_url = $_POST['callback_url'];
         $o_id = rand(100000, 999999);
-        $id = create_order($_SESSION['customer_email'], $o_id, $total, $origin, $destination, $order_date);
+
+        // get all items in the shopping cart for this user
+        $sql = "SELECT * FROM cart WHERE ip_add='$ip_add';";
+        $query = mysqli_query($con, $sql);
+        if (!$query) die("Error getting items in cart: ".mysqli_error($con));
+        
+        while ($data = mysqli_fetch_array($query)){
+            $origin = $data['origin'];
+            $destination = $data['destination'];
+            $id = create_order($_SESSION['customer_email'], $o_id, $total, $origin, $destination);
+        }
+        
+
 
         // print($id);
         // die();
         $mpesa = new MpesaApi($id);
+        $mpesa->setCallBackUrl($callback_url);
+        
         $token = $mpesa->get_access_tocken();
 
 
@@ -50,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
         // Order has been successful. Delete shopping cart
-        $ip_add = getRealIpUser();
         $sql = "DELETE FROM cart WHERE ip_add='$ip_add';";
         $query = mysqli_query($con, $sql);
         if (!$query){
@@ -112,10 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <th>Origin</th>
                             <th>Destination</th>
                             <th>Order Date</th>
-
-
-
-
                         </tr><!--tr   finish -->
 
                     </thead>
@@ -123,7 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <?php
 
                         $total = 0;
-
                         //   $pro_id = $row_cart['p_id'];
                         //   $pro_size = $row_cart['size'];
                         //   $pro_qty = $row_cart['qty'];
@@ -138,10 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             $origin = $row_products['origin'];
                             $destination = $row_products['destination'];
                             $order_date = $row_products['order_date'];
-
-
-
-
                             ?>
 
                             <tr><!--tr   begin-->

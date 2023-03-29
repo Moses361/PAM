@@ -7,8 +7,14 @@ $data = json_decode($data);
 
 $transportCost = $data->transportCost;
 $productId = $data->productId;
+$origin = $data->origin;
+$destination = $data->destination;
 
-$sql = "UPDATE cart SET transport_cost='$transportCost' WHERE p_id='$productId'";
+$sql = "UPDATE cart SET 
+transport_cost='$transportCost',
+origin='$origin',
+destination='$destination'
+WHERE p_id='$productId'";
 
 $query = mysqli_query($con, $sql);
 
@@ -20,6 +26,6 @@ if ($query){
 }else{
     echo json_encode([
         "success"=>false,
-        'message'=>"Unable to update transport cost"
+        'message'=>"Unable to update transport cost: ".mysqli_error($con)
     ]);
 }

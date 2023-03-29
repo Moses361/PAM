@@ -39,7 +39,7 @@
                             <tr><!-- tr begin -->
                                 <th> No: </th>
                                 <th> Customer Email: </th>
-                                <th> Invoice No: </th>
+                                <th>Order ID: </th>
                                 <!-- <th> Service  Name: </th> -->
                                 <!-- <th> Service Qty: </th> -->
                                 <th> origin: </th>

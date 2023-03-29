@@ -107,14 +107,14 @@ $discount = $count2 * 200;
                         <?php echo $pro_size; ?>
                       </td>
                       <td>
-                        <label for="source" style="display: block;">Origin</label> 
-                        <select name="source" class="source" data-id="<?php echo $pro_id; ?>">
+                        <label for="origin" style="display: block;">Origin</label> 
+                        <select name="origin" id="origin" class="source" data-id="<?php echo $pro_id; ?>">
                           <option value="">-- Select Origin --</option>
                           <option value="">Nairobi</option>
                         </select>
                         <!-- destination -->
                         <label for="destination" style="display: block;">Destination</label>
-                        <select name="destination" class="destination" data-id="<?php echo $pro_id; ?>">
+                        <select name="destination" id="destination" class="destination" data-id="<?php echo $pro_id; ?>">
                           <option value="">-- Select Destination --</option>
                           <option value="">Nyeri</option>
                         </select>
@@ -537,7 +537,7 @@ include("includes/footer.php")
       const distance = getDistance(src, dst);
       price += pricePerKm * distance;
       const productId = sources[i].getAttribute('data-id');
-      updateTransportCost(productId, (pricePerKm * distance))
+      updateTransportCost(productId, (pricePerKm * distance), src, dst)
     }
 
     deliveryTotal.setAttribute("data-value", price); // update to new total
@@ -550,10 +550,10 @@ include("includes/footer.php")
   }
 
   // function to update the transport cost of a certain product
-  function updateTransportCost(productId, transportCost) {
+  function updateTransportCost(productId, transportCost, origin, destination) {
     fetch("cartUtils.php", {
-      method: "post",
-      body: JSON.stringify({ productId, transportCost })
+      method: "POST",
+      body: JSON.stringify({ productId, transportCost, origin, destination })
     }).then(res => res.json()).then(res => {
       // console.log("response: ", res)
     })
