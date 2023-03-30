@@ -1,3 +1,14 @@
+<style>
+.pending{
+    color: orange;
+}
+.paid{
+    color: green;
+}
+.cancelled{
+    color: maroon;
+}
+</style>
 <?php 
     
     if(!isset($_SESSION['admin_email'])){
@@ -5,7 +16,31 @@
         echo "<script>window.open('login.php','_self')</script>";
         
     }else{
+        require_once('../payment.php');
+        // check order payment status
+        function checkOrderPaymentStatus($con){
+            $sql = "SELECT * FROM transactions WHERE checked=false AND transaction_id != ''";
+            $query = mysqli_query($con, $sql);
+            if (!$query) die("Error getting transactions: ".mysqli_error($con));
 
+            while(($data = mysqli_fetch_array($query))){
+                $order_id = $data['order_id'];
+                $mpesa = new MpesaApi($order_id);
+                $response = $mpesa->verifyTransactionDetails($data['transaction_id']);
+                $data = json_decode($response, true);
+                $resultCode = $data['ResultCode'];
+                if ($resultCode == 0){
+                    // order successfully paid. update order status
+                    $sql = "UPDATE orders SET payment_status='Paid' WHERE order_id='$order_id';";
+                }else{
+                    // order cancelled or not paid, or cancelled by the user
+                    $sql = "UPDATE orders SET payment_status='Cancelled' WHERE order_id='$order_id';";
+                }
+                $q2 = mysqli_query($con, $sql); // update orders
+                mysqli_query($con, "UPDATE transactions SET checked=true WHERE order_id='$order_id';"); // set as checked
+                if (!$q2) die("Errror updating payment status: ".mysqli_error($con));
+            }
+        }
 ?>
 
 <div class="row"><!-- row 1 begin -->
@@ -54,34 +89,28 @@
                         <tbody><!-- tbody begin -->
                             
                             <?php 
-          
+                                // update orders payment status
+                                checkOrderPaymentStatus($con);
                                 $i=0;
-                            
+
                                 $get_orders = "select * from orders";
                                 
                                 $run_orders = mysqli_query($con,$get_orders);
           
                                 while($row_order=mysqli_fetch_array($run_orders)){
-                                    
                                     $customer = $row_order['customer'];
-                                    
                                     // $c_id = $row_order['customer_id'];
                                     $order_id = $row_order['id'];
-                                    
                                     $invoice_no = $row_order['order_id'];
                                     // $origin       = $row_order['origin'];
                                     // $destination  = $row_order['destination'];
                                     $origin       = $row_order['origin'];
                                     $destination  = $row_order['destination'];
                                     $date = $row_order['order_date'];
-
-
-
-                                    
                                     $amount = $row_order['amount'];
-                                    
+
+                                    // verify payment status of the product
                                     $status = $row_order['payment_status'];
-                                    
                                     // $size = $row_order['size'];
                                     
                                     // $order_status = $row_order['order_status'];
@@ -122,13 +151,11 @@
                                 <td> <?php echo $invoice_no; ?></td>
                                 <td> <?php echo $origin; ?></td>
                                 <td> <?php echo $destination; ?></td>
-
                                 <td> <?php echo $amount; ?> </td>
-                                <td> <?php echo $status; ?> </td>
+                                <td> <?php 
+                                    $class = strtolower($status);
+                                    echo "<span class='$class'> $status </span>";?> </td>
                                 <td> <?php echo $date; ?> </td>
-
-
-                              
                                 <td> 
                                      
                                      <a href="index.php?delete_order=<?php echo $order_id; ?>">

@@ -117,7 +117,8 @@ class MpesaApi
 
 	public function verifyTransactionDetails($transactionID){
 		$access_token = $this->get_access_tocken();
-		$url = 'https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query';
+		$url = 'https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query';
+		
 
 		$headers = [
 			'Authorization: Bearer ' . $access_token,
@@ -125,15 +126,19 @@ class MpesaApi
 		];
 		
 		$data = [
+			"BusinessShortCode" => $this->BusinessShortCode,
+			"Password" => $this->Password,
+			"Timestamp"=> $this->Timestamp,
+			"CheckoutRequestID"=>$transactionID,
 			'Initiator' => $this->BusinessShortCode,
 			'SecurityCredential' => $this->PassKey,
 			'CommandID' => 'TransactionStatusQuery',
 			'TransactionID' => $transactionID,
 			'PartyA' => $this->PartyA,
 			'IdentifierType' => '4',
-			'ResultURL' => '',
-			'QueueTimeOutURL' => '',
-			'Remarks' => '',
+			'ResultURL' => 'https://example.com',
+			'QueueTimeOutURL' => "https://example.com",
+			'Remarks' => 'Check transaction status',
 			'Occasion' => ''
 		];
 		
@@ -147,15 +152,7 @@ class MpesaApi
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 		
 		$result = curl_exec($ch);
-		$data = json_decode($result, true);
-		
-		$status = $data['Result']['ResultCode'];
-		
-		if ($status == 0) {
-			die('Transaction successful');
-		} else {
-			die('Transaction failed');
-		}
+		return $result;
 	}
 }
 

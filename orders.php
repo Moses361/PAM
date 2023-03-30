@@ -49,7 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $message = $mpesa->stk_push($token, $amount, $new_phone);
         // print($message);
         $res = json_decode($message);
-        // die($res->CheckoutRequestID);
+        $transaction_id = $res->CheckoutRequestID;
+
+        // save transaction details
+        $sql = "INSERT INTO transactions(order_id, transaction_id) VALUES('$o_id', '$transaction_id');";
+        $query = mysqli_query($con, $sql);
+
+        if(!$query){
+            echo json_encode([
+                "success"=>false,
+                "message"=>"Unable to save transaction info: ".mysqli_error($con)
+            ]);
+            return;
+        }
 
         // order has been processed. Update referrals
         $session_email = trim($_SESSION['customer_email']);
@@ -69,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 }
-
-
 ?>
 
 
