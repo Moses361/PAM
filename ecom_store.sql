@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 29, 2021 at 01:07 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Host: localhost
+-- Generation Time: Mar 30, 2023 at 10:19 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `admins` (
   `admin_about` text NOT NULL,
   `admin_contact` varchar(255) NOT NULL,
   `admin_job` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admins`
@@ -58,7 +58,7 @@ CREATE TABLE `cart` (
   `qty` int(10) NOT NULL,
   `p_price` varchar(255) NOT NULL,
   `size` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE `customers` (
   `customer_address` text NOT NULL,
   `customer_image` text NOT NULL,
   `customer_ip` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `customers`
@@ -103,7 +103,7 @@ CREATE TABLE `customer_orders` (
   `size` text NOT NULL,
   `order_date` date NOT NULL,
   `order_status` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `customer_orders`
@@ -126,7 +126,7 @@ CREATE TABLE `messages` (
   `email` varchar(100) NOT NULL,
   `subject` varchar(100) NOT NULL,
   `message` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE `payments` (
   `ref_no` int(10) NOT NULL,
   `code` int(10) NOT NULL,
   `payment_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ CREATE TABLE `pending_orders` (
   `qty` int(10) NOT NULL,
   `size` text NOT NULL,
   `order_status` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `pending_orders`
@@ -189,7 +189,7 @@ CREATE TABLE `products` (
   `product_desc` text NOT NULL,
   `product_label` text NOT NULL,
   `product_sale` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `products`
@@ -231,7 +231,7 @@ CREATE TABLE `product_categories` (
   `p_cat_id` int(10) NOT NULL,
   `p_cat_title` text NOT NULL,
   `p_cat_desc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `product_categories`
@@ -256,7 +256,7 @@ CREATE TABLE `slider` (
   `slide_name` varchar(255) NOT NULL,
   `slide_image` text NOT NULL,
   `slide_url` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `slider`
@@ -280,7 +280,7 @@ CREATE TABLE `terms` (
   `term_title` varchar(100) NOT NULL,
   `term_link` varchar(100) NOT NULL,
   `term_desc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `terms`

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 28, 2023 at 05:23 PM
+-- Host: localhost
+-- Generation Time: Mar 30, 2023 at 10:18 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,15 +58,19 @@ CREATE TABLE `cart` (
   `qty` int(11) NOT NULL,
   `p_price` varchar(255) NOT NULL,
   `size` text NOT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `transport_cost` int(12) NOT NULL DEFAULT 0,
+  `origin` varchar(50) DEFAULT NULL,
+  `destination` varchar(50) DEFAULT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`p_id`, `ip_add`, `qty`, `p_price`, `size`, `id`) VALUES
-(31, '::1', 3, '25500', 'Durable', 28);
+INSERT INTO `cart` (`p_id`, `ip_add`, `qty`, `p_price`, `size`, `id`, `transport_cost`, `origin`, `destination`, `order_date`) VALUES
+(31, '::1', 3, '25500', 'Durable', 28, 291, 'Nairobi', 'Nyeri', '2023-03-30 21:00:00');
 
 -- --------------------------------------------------------
 
@@ -179,7 +183,7 @@ CREATE TABLE `orders` (
   `amount` varchar(255) DEFAULT NULL,
   `origin` varchar(100) NOT NULL,
   `destination` varchar(100) NOT NULL,
-  `order_date` varchar(50) NOT NULL
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -187,27 +191,37 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer`, `order_id`, `payment_status`, `amount`, `origin`, `destination`, `order_date`) VALUES
-(50, 'moses@gmail.com', '1991', 'pending', '29500', '', '', ''),
-(51, 'maureen@gmail.com', '3768', 'pending', '29500', '', '', ''),
-(52, 'moses@gmail.com', '5343', 'pending', '10500', '', '', ''),
-(53, 'moses@gmail.com', '9438', 'pending', '10500', '', '', ''),
-(54, 'moses@gmail.com', '4567uhhj', 'pending', '10500', '', '', ''),
-(55, 'moses@gmail.com', '4567uhhj', 'pending', '10500', '', '', ''),
-(57, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Coast', 'Rift valley', '2023-03-26 17:09:51'),
-(58, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 17:11:02'),
-(59, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 17:11:26'),
-(60, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 17:12:00'),
-(61, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Coast', 'Nairobi', '2023-03-26 17:12:30'),
-(62, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Coast', '2023-03-26 17:13:15'),
-(63, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Rift valley', '2023-03-26 17:13:45'),
-(64, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Rift valley', 'Coast', '2023-03-26 17:33:02'),
-(65, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', ''),
-(66, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', '2023-03-29'),
-(68, 'moses@gmail.com', '714940', 'pending', '27100', 'Nairobi', 'Coast', '2023-04-01'),
-(69, 'moses@gmail.com', '295482', 'pending', '27100', 'Rift valley', 'Nairobi', '2023-03-28'),
-(70, 'johniekyalo001@gmail.com', '619841', 'pending', '25500', 'Nairobi', 'Western', '2023-04-06'),
-(71, 'johniekyalo001@gmail.com', '314756', 'pending', '25500', 'Rift valley', 'Nairobi', '2023-03-30'),
-(72, 'moses@gmail.com', '824238', 'pending', '60000', 'Nairobi', 'Coast', '2023-04-05');
+(58, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:11:02'),
+(59, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:11:26'),
+(60, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:12:00'),
+(61, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Coast', 'Nairobi', '2023-03-26 14:12:30'),
+(62, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Coast', '2023-03-26 14:13:15'),
+(63, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Rift valley', '2023-03-26 14:13:45'),
+(64, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Rift valley', 'Coast', '2023-03-26 14:33:02'),
+(65, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', '2023-03-26 14:09:51'),
+(66, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', '2023-03-28 21:00:00'),
+(68, 'moses@gmail.com', '714940', 'pending', '27100', 'Nairobi', 'Coast', '2023-03-31 21:00:00'),
+(69, 'moses@gmail.com', '295482', 'pending', '27100', 'Rift valley', 'Nairobi', '2023-03-27 21:00:00'),
+(70, 'johniekyalo001@gmail.com', '619841', 'pending', '25500', 'Nairobi', 'Western', '2023-04-05 21:00:00'),
+(71, 'johniekyalo001@gmail.com', '314756', 'pending', '25500', 'Rift valley', 'Nairobi', '2023-03-29 21:00:00'),
+(72, 'moses@gmail.com', '824238', 'pending', '60000', 'Nairobi', 'Coast', '2023-04-04 21:00:00'),
+(89, 'jose@gmail.com', '670899', 'pending', '66500', 'Nairobi', 'Nairobi', '2023-03-29 16:40:15'),
+(90, 'jose@gmail.com', '670899', 'pending', '66500', 'Nairobi', 'Nairobi', '2023-03-29 16:40:15'),
+(91, 'jose@gmail.com', '670899', 'pending', '66500', 'Nairobi', 'Nairobi', '2023-03-29 16:40:16'),
+(92, 'jose@gmail.com', '690138', 'pending', '13500', 'Nairobi', 'Nairobi', '2023-03-29 16:43:48'),
+(93, 'jose@gmail.com', '690138', 'pending', '13500', 'Nairobi', 'Thika', '2023-03-29 16:43:48'),
+(94, 'jose@gmail.com', '556681', 'pending', '55000', 'Nairobi', 'Nairobi', '2023-03-29 18:12:43'),
+(95, 'jose@gmail.com', '556681', 'pending', '55000', 'Nairobi', 'Nairobi', '2023-03-29 18:12:43'),
+(96, 'jose@gmail.com', '541780', 'pending', '16000', 'Nairobi', 'Lodwar', '2023-03-29 18:23:13'),
+(97, 'jose@gmail.com', '541780', 'pending', '16000', 'Nairobi', 'Kendu Bay', '2023-03-29 18:23:14'),
+(98, 'jose@gmail.com', '504036', 'pending', '5500', 'Nairobi', 'Nairobi', '2023-03-29 19:21:07'),
+(99, 'moses@gmail.com', '941646', 'pending', '20000', 'Kendu Bay', 'Nairobi', '2023-03-29 19:31:36'),
+(100, 'jose@gmail.com', '760854', 'pending', '5500', 'Nairobi', 'Kisumu', '2023-03-29 21:00:00'),
+(101, 'jose@gmail.com', '797391', 'pending', '5500', 'Nairobi', 'Kisumu', '2023-03-29 21:00:00'),
+(102, 'jose@gmail.com', '957053', 'Paid', '8300', 'Nairobi', 'Nairobi', '2023-03-29 21:00:00'),
+(103, 'jose@gmail.com', '361128', 'Paid', '5500', 'Kakamega', 'Nairobi', '2023-03-31 21:00:00'),
+(104, 'jose@gmail.com', '236304', 'Paid', '5500', 'Nairobi', 'Sotik', '2023-03-31 21:00:00'),
+(105, 'jose@gmail.com', '424038', 'Cancelled', '20000', 'Nairobi', 'Nyeri', '2023-03-30 21:00:00');
 
 -- --------------------------------------------------------
 
@@ -346,27 +360,28 @@ CREATE TABLE `referals` (
   `date` varchar(100) DEFAULT NULL,
   `link_code` varchar(50) DEFAULT NULL,
   `initiator` varchar(200) DEFAULT NULL,
-  `discount` int(11) DEFAULT NULL
+  `discount` int(11) DEFAULT NULL,
+  `redeemed` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `referals`
 --
 
-INSERT INTO `referals` (`id`, `username`, `date`, `link_code`, `initiator`, `discount`) VALUES
-(1, 'colls', '12-12-2023', 'rtyu88', 'devida@gmail.com', 34),
-(2, 'test@gmail.com', '2023-03-07 09:00:02', 'test@gmail.com', 'devida@gmail.com', 100),
-(3, 'will@gmail.com', '2023-03-07 07:24:20', 'will@gmail.com', 'moses@gmail.com', 100),
-(4, 'linky@gmail.com', '2023-03-07 07:27:12', 'linky@gmail.com', 'moses@gmail.com', 100),
-(5, 'maureen@gmail.com', '2023-03-08 11:08:37', 'maureen@gmail.com', 'moses@gmail.com', 100),
-(6, 'faith@gmail.com', '2023-03-08 11:10:55', 'faith@gmail.com', 'maureen@gmail.com', 100),
-(7, 'ronny@gmail.com', '2023-03-09 07:15:09', 'ronny@gmail.com', 'moses@gmail.com', 100),
-(8, 'vivian@gmail.com', '2023-03-09 19:30:54', 'vivian@gmail.com', 'maureen@gmail.com', 100),
-(9, 'johniekyalo001@gmail.com', '2023-03-09 19:42:13', 'johniekyalo001@gmail.com', 'odhismose20@gmail.com', 100),
-(10, 'tonny@gmail.com', '2023-03-10 13:30:41', 'tonny@gmail.com', 'moses@gmail.com', 100),
-(11, 'tony@gmail.com', '2023-03-12 07:33:32', 'tony@gmail.com', 'odhismose20@gmail.com', 100),
-(12, 'edwinochieng@gmail.com', '2023-03-17 15:55:14', 'edwinochieng@gmail.com', 'moses@gmail.com', 200),
-(13, 'jose@gmail.com', '2023-03-27 20:05:03', 'jose@gmail.com', 'moses@gmail.com', 200);
+INSERT INTO `referals` (`id`, `username`, `date`, `link_code`, `initiator`, `discount`, `redeemed`) VALUES
+(1, 'colls', '12-12-2023', 'rtyu88', 'devida@gmail.com', 34, 0),
+(2, 'test@gmail.com', '2023-03-07 09:00:02', 'test@gmail.com', 'devida@gmail.com', 100, 0),
+(3, 'will@gmail.com', '2023-03-07 07:24:20', 'will@gmail.com', 'moses@gmail.com', 100, 0),
+(4, 'linky@gmail.com', '2023-03-07 07:27:12', 'linky@gmail.com', 'moses@gmail.com', 100, 0),
+(5, 'maureen@gmail.com', '2023-03-08 11:08:37', 'maureen@gmail.com', 'moses@gmail.com', 100, 0),
+(6, 'faith@gmail.com', '2023-03-08 11:10:55', 'faith@gmail.com', 'maureen@gmail.com', 100, 0),
+(7, 'ronny@gmail.com', '2023-03-09 07:15:09', 'ronny@gmail.com', 'moses@gmail.com', 100, 0),
+(8, 'vivian@gmail.com', '2023-03-09 19:30:54', 'vivian@gmail.com', 'maureen@gmail.com', 100, 0),
+(9, 'johniekyalo001@gmail.com', '2023-03-09 19:42:13', 'johniekyalo001@gmail.com', 'odhismose20@gmail.com', 100, 0),
+(10, 'tonny@gmail.com', '2023-03-10 13:30:41', 'tonny@gmail.com', 'moses@gmail.com', 100, 0),
+(11, 'tony@gmail.com', '2023-03-12 07:33:32', 'tony@gmail.com', 'odhismose20@gmail.com', 100, 0),
+(12, 'edwinochieng@gmail.com', '2023-03-17 15:55:14', 'edwinochieng@gmail.com', 'moses@gmail.com', 200, 0),
+(13, 'jose@gmail.com', '2023-03-27 20:05:03', 'moses@gmail.com', 'jose@gmail.com', 200, 1);
 
 -- --------------------------------------------------------
 
@@ -412,6 +427,31 @@ INSERT INTO `terms` (`term_id`, `term_title`, `term_link`, `term_desc`) VALUES
 (9, 'Rules & Regulations', 'link_1', '<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ut itaque quibusdam dolores modi natus. Enim earum laboriosam, quos error voluptatem fugiat eos? In maiores quia eligendi, ea aperiam voluptate.</div>'),
 (10, 'Promo & Regulations', 'link_2', '<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ut itaque quibusdam dolores modi natus. Enim earum laboriosam, quos error voluptatem fugiat eos? In maiores quia eligendi, ea aperiam voluptate.</div>'),
 (11, 'Refund Condition Policy', 'link_3', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ut itaque quibusdam dolores modi natus. Enim earum laboriosam, quos error voluptatem fugiat eos? In maiores quia eligendi, ea aperiam voluptate.</p>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `transaction_id` varchar(70) NOT NULL,
+  `checked` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `order_id`, `transaction_id`, `checked`) VALUES
+(3, 364950, 'ws_CO_30032023101232946114662464', 1),
+(4, 289172, 'ws_CO_30032023101903945114662464', 1),
+(5, 957053, '', 1),
+(6, 361128, '', 1),
+(7, 236304, 'ws_CO_30032023110203044114662464', 1),
+(8, 424038, 'ws_CO_30032023111235831114662464', 1);
 
 --
 -- Indexes for dumped tables
@@ -502,6 +542,12 @@ ALTER TABLE `terms`
   ADD PRIMARY KEY (`term_id`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -515,7 +561,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -539,7 +585,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `order_items`
@@ -588,6 +634,12 @@ ALTER TABLE `slider`
 --
 ALTER TABLE `terms`
   MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
