@@ -121,7 +121,7 @@ $discount = $count2 * 200;
 
                       </td>
                       <td>
-                        <input type="date" name="orderDate" class="orderDate" style="width: 110px">
+                        <input type="date" name="orderDate" class="orderDate" style="width: 110px" data-id="<?=$pro_id;?>">
                       </td>
                       <td>
                         <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
@@ -439,6 +439,10 @@ include("includes/footer.php")
       if (selectedDate < now) {
         this.value = today;
       }
+
+      // update order date
+      const productId = this.getAttribute("data-id");
+      updateOrderDate(productId, this.value);
     });
   })
 
@@ -533,13 +537,22 @@ include("includes/footer.php")
 
   // function to update the transport cost of a certain product
   function updateTransportCost(productId, transportCost, origin, destination) {
-    fetch("cartUtils.php", {
+    fetch("cartUtils.php?action=update_transport_cost", {
       method: "POST",
       body: JSON.stringify({ productId, transportCost, origin, destination })
     }).then(res => res.json()).then(res => {
       // console.log("response: ", res)
     })
 
+  }
+
+  function updateOrderDate(productId, orderDate){
+    fetch("cartUtils.php?action=update_order_date", {
+      method: "POST",
+      body: JSON.stringify({ productId, orderDate })
+    }).then(res => res.json()).then(res => {
+      // console.log("response: ", res)
+    })
   }
 
 </script>

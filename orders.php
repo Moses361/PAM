@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         while ($data = mysqli_fetch_array($query)){
             $origin = $data['origin'];
             $destination = $data['destination'];
-            $id = create_order($_SESSION['customer_email'], $o_id, $total, $origin, $destination);
+            $order_date = $data['order_date'];
+            $id = create_order($_SESSION['customer_email'], $o_id, $total, $origin, $destination,$order_date);
         }
         
 

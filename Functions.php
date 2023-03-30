@@ -6,13 +6,13 @@
 
 // }
 
-function create_order($customer, $order_id, $amount, $origin, $destination) {
+function create_order($customer, $order_id, $amount, $origin, $destination, $order_date) {
     $con = mysqli_connect ("localhost","root","","pam");
     $payment_status = "pending";
     // print($order_date);
     // die();
     
-    $insert_order = "INSERT INTO orders (customer, order_id, payment_status, amount, origin, destination) VALUES ('$customer', '$order_id', '$payment_status', '$amount', '$origin', '$destination')";
+    $insert_order = "INSERT INTO orders (customer, order_id, payment_status, amount, origin, destination, order_date) VALUES ('$customer', '$order_id', '$payment_status', '$amount', '$origin', '$destination','$order_date');";
     $run_order = mysqli_query($con, $insert_order);
 
     if ($run_order) {
