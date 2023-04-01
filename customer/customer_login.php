@@ -6,7 +6,6 @@
          
              <h1>Login</h1>
              <p class="lead">Already have an account.?</p>
-             <p class="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores deleniti saepe, omnis quis, sed illum recusandae ipsum reiciendis unde illo quam sunt libero aspernatur consequuntur rerum, voluptates dolor ducimus! Beatae.</p>
          
          </center>   
     
