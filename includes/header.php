@@ -118,8 +118,8 @@
                <diV class="navbar-header"><!--navbar-header begin -->
                
                   <a href="index.php" class="navbar-brand home"><!--navbar-brand home begin -->
-                    <img src="logo/logo.png" alt="M-Dev-Store Logo" class="hidden-xs">
-                    <img src="logo/logo.png" alt="M-Dev-Store Logo Mobile" class="visible-xs">
+                    <img src="/images/logo.png" alt="M-Dev-Store Logo" class="hidden-xs">
+                    <img src="/images/logo.png" alt="M-Dev-Store Logo Mobile" class="visible-xs">
 
                   </a><!--navbar-brand home finish -->
                   <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">

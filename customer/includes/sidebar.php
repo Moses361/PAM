@@ -3,7 +3,7 @@
     <div class="panel-heading"><!--panel-heading begin-->
     
        <?php
-       
+       $con = mysqli_connect("localhost", "root", "", "pam");
          $customer_session = $_SESSION['customer_email'];
          $get_customer = "select * from customers where customer_email='$customer_session'";
          $run_customer = mysqli_query($con, $get_customer);
