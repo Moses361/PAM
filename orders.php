@@ -131,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <th>Origin</th>
                             <th>Destination</th>
                             <th>Order Date</th>
+                            <th>Cancel Order</th>
                         </tr><!--tr   finish -->
 
                     </thead>
@@ -176,7 +177,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <td>
                                     <?php echo $order_date; ?>
                                 </td>
-
+				 <th>
+                                    <a style="cursor:pointer;" href="cancelOrders.php?order_id=<?php echo $oId; ?>"> <i class="fa fa-trash text-danger"></i> Cancel</a>
+                                </th>
 
                             </tr><!--tr   Finish -->
                         <?php

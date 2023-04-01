@@ -29,7 +29,7 @@
                 <th> Invoice No: </th>
                 <th> Qty: </th>
                 <th> Order Date:</th>
-                <th> Paid / Pending: </th>
+                <th> Paid / Cancelled: </th>
                 <th> Status: </th>
                 
             </tr><!--  tr Finish  -->
