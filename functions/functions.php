@@ -271,8 +271,8 @@ function getPCats(){
  /// begining items() function/// 
 
 function items(){
-
    global $db;
+   
    $ip_add = getRealIpUser();
    $get_items = "select * from cart where ip_add='$ip_add'";
    $run_items = mysqli_query($db, $get_items);

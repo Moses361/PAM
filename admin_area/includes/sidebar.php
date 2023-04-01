@@ -187,19 +187,16 @@
                 </ul><!-- collapse finish -->
                 
             </li><!-- li finish -->
-             <li><!-- li begin -->
-                <a href="index.php?edit_css"><!-- a href begin -->
-                    <i class="fa fa-fw fa-pencil"></i> CSS Editor
-                </a><!-- a href finish -->
-            </li><!-- li finish -->
-            
             <li><!-- li begin -->
                 <a href="index.php?view_orders"><!-- a href begin -->
                     <i class="fa fa-fw fa-book"></i> View Orders
                 </a><!-- a href finish -->
             </li><!-- li finish -->
-            
-      
+            <li><!-- li begin -->
+                <a href="index.php?view_referrals"><!-- a href begin -->
+                    <i class="fa fa-fw fa-link"></i> Referrals
+                </a><!-- a href finish -->
+            </li><!-- li finish -->
             
             <li><!-- li begin -->
                 <a href="#" data-toggle="collapse" data-target="#users"><!-- a href begin -->

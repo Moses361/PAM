@@ -1,7 +1,4 @@
 <?php
-
-print("hello");
-die();
 include("includes/header.php");
 include_once 'payment.php';
 include_once 'Functions.php';
@@ -12,9 +9,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(isset($_POST['checkout'])){
         $amount = $_POST["amount"];
         $phone = $_POST["phone"];
-        $origin = getLocationName($_POST["origin"]);
-        $destination = getLocationName($_POST["destination"]);
-        $order_date = getLocationName($_POST["order_date"]);
+        $origin = $_POST["origin"];
+        $destination = $_POST["destination"];
+        $order_date = $_POST["order_date"];
 
 
         // print($destination);
