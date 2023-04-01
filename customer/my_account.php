@@ -7,9 +7,10 @@
 
    }else{
 
-     
+  
    include("includes/db.php"); 
    include("functions/functions.php");
+
 
 ?>
 <!DOCTYPE html>
@@ -34,13 +35,11 @@
                 <a href="#" class="btn btn-success btn-sm">
                 
                       <?php 
-                  
                      if(!isset($_SESSION['customer_email'])){
                        
                        echo "Welcome: Guest";
                        
                    }else{
-                       
                        echo "Welcome: " . $_SESSION['customer_email'] . "";
                        
                    }
@@ -48,7 +47,7 @@
                   ?>
                 
                 </a>
-                <a href="checkout.php"><?php  items();  ?> Items In Your Order | Total Price: Ksh.<?php total_price(); ?></a>
+                <a href="checkout.php"><?php   items();   ?> Items In Your Order | Total Price: Ksh.<?php total_price(); ?></a>
 
              </div><!--offer Finish -->
 
