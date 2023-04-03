@@ -7,8 +7,8 @@ $intiator = trim($_SESSION['customer_email']);
 
 $select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false;";
 $run_cart2 = mysqli_query($con, $select_cart);
-$count2 = mysqli_num_rows($run_cart2);
-$discount = $count2 * 200;
+$data  = mysqli_fetch_array($run_cart2);
+$discount = $data['discount'];
 // die();
 
 

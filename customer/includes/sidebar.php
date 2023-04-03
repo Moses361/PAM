@@ -17,7 +17,7 @@
          }else{
 
             echo"
-            
+            CS
                <center>
                
                   <img src='customer_images/$customer_image' class='img-responsive'>
