@@ -26,8 +26,8 @@ class MpesaApi
 		// product id
 		$this->id = $id;
 		// tocken requirements
-		$this->consumerKey     	 ="b5zUKrwKQ0uczvCzZQG2Kl72Scky9P0f";
-		$this->consumerSecret    ="ANoMXAaPCuHWFfdm";
+		$this->consumerKey     	 ="Tsp4EQNm2EaKOhORQuybaT8XjsLjbjC2";
+		$this->consumerSecret    ="BSypyAThXbsGUl8z";
 		$this->credentials     	 = base64_encode($this->consumerKey.":".$this->consumerSecret);		
 		//process requirements		
 		$this->BusinessShortCode = 174379;

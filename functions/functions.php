@@ -114,7 +114,7 @@ function getPro()
                                 View Details
                             </a>
                             <a class='btn btn-primary' href='details.php?pro_id=$pro_id'>
-                                <i class='fa fa-book'></i> Book
+                                <i class='fa fa-shopping-cart'></i> Book
                             </a>
                        
                        </p>

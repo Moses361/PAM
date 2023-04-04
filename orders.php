@@ -18,7 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $sql = "SELECT * FROM cart WHERE ip_add='$ip_add';";
         $query = mysqli_query($con, $sql);
         if (!$query) die("Error getting items in cart: ".mysqli_error($con));
-        
+
+        $intiator = trim($_SESSION['customer_email']);
+        $discount = 0; 
+        $select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false;";
+        $run_cart2 = mysqli_query($db, $select_cart);
+        if(mysqli_num_rows($run_cart2) > 0){
+            while($data = mysqli_fetch_array($run_cart2)){
+                $discount += $data['discount'];
+            }
+            
+            $total -= $discount; // deduct discount here before creating an order
+        }
+
         while ($data = mysqli_fetch_array($query)){
             $origin = $data['origin'];
             $destination = $data['destination'];
@@ -49,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $message = $mpesa->stk_push($token, $amount, $new_phone);
         // print($message);
         $res = json_decode($message);
-        $transaction_id = $res->CheckoutRequestID;
+        $transaction_id = $res-> CheckoutRequestID;
 
         // save transaction details
         $sql = "INSERT INTO transactions(order_id, transaction_id) VALUES('$o_id', '$transaction_id');";
@@ -115,7 +127,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <p class="lead">
             <!-- Paypal Payment -->
-
+<style>
+    @media print{
+        .no-print{
+            display: none;
+        }
+    }
+</style>
             <!-- <img  class="img-responsive" src="images/paypal_img.png" alt="img_paypal"> -->
         <form action="" class="form-login" method="post"><!-- form-login begin -->
             <h2 class="form-login-heading"> Refresh to update status</h2>
@@ -131,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <th>Origin</th>
                             <th>Destination</th>
                             <th>Order Date</th>
-                            <th>Cancel Order</th>
+                            <th class="no-print">Cancel Order</th>
                         </tr><!--tr   finish -->
 
                     </thead>
@@ -178,7 +196,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                     <?php echo $order_date; ?>
                                 </td>
 				 <th>
+                                    <div class="no-print">
                                     <a style="cursor:pointer;" href="cancelOrders.php?order_id=<?php echo $oId; ?>"> <i class="fa fa-trash text-danger"></i> Cancel</a>
+                                    </div>
                                 </th>
 
                             </tr><!--tr   Finish -->

@@ -5,10 +5,14 @@ include("includes/header.php");
 
 $intiator = trim($_SESSION['customer_email']);
 
+$discount = 0;
 $select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false;";
 $run_cart2 = mysqli_query($con, $select_cart);
-$data  = mysqli_fetch_array($run_cart2);
-$discount = $data['discount'];
+if(mysqli_num_rows($run_cart2) > 0){
+  while($data = mysqli_fetch_array($run_cart2)){
+    $discount += $data['discount'];
+  }
+}
 // die();
 
 
