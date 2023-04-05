@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $total -= $discount; // deduct discount here before creating an order
         }
 
+        // include transport cost in calculating the total price of the product
+        while($row = mysqli_fetch_array($query)){
+            $total += $row['transport_cost'];
+        }
+
+        $query = mysqli_query($con, $sql);
+        $id = ""; //initially transaction id is empty. Updated once an order is successful
         while ($data = mysqli_fetch_array($query)){
             $origin = $data['origin'];
             $destination = $data['destination'];
@@ -61,7 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $message = $mpesa->stk_push($token, $amount, $new_phone);
         // print($message);
         $res = json_decode($message);
-        $transaction_id = $res-> CheckoutRequestID;
+        $transaction_id = "";
+        if(!isset($res-> CheckoutRequestID)){
+            die("Unable to reach the M-Pesa number you provided: ".$phone); // order processing must require a valid M-Pesa phone number
+        }else{
+            echo "Kindly check the M-Pesa popup sent to your phone to complete the order. Thank you.";
+        }
+
 
         // save transaction details
         $sql = "INSERT INTO transactions(order_id, transaction_id) VALUES('$o_id', '$transaction_id');";
@@ -119,7 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <p class="lead text-center"><!-- lead text-center Begin -->
 
-        <!-- <a href="order.php?c_id=<?php echo $customer_id ?>"> Offline Payment </a> -->
 
     </p>
 

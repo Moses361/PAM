@@ -325,11 +325,15 @@ function total_price2()
 {
     global $db;
     // get discount 
+    $discount = 0;
     $intiator = trim($_SESSION['customer_email']);
-    $select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false LIMIT 1;";
+    $select_cart = "SELECT  * from referals where initiator  ='$intiator' AND redeemed=false;";
     $run_cart2 = mysqli_query($db, $select_cart);
-    $data = mysqli_fetch_array($run_cart2);
-    $discount = $data['discount'];
+    if(mysqli_num_rows($run_cart2) > 0){
+        while($data = mysqli_fetch_array($run_cart2)){
+            $discount += $data['discount'];
+        }
+    }
     
     // get other price
     $ip_add = getRealIpUser();

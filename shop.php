@@ -32,7 +32,7 @@
 
             echo"
                <div class='box'><!--box   begin -->
-                     <h1>Shop</h1>
+                     <h1>SERVICES</h1>
                      <p>
                      The Rocket Delivery System provides a comprehensive range of services to make the relocation process as seamless and stress-free as possible for clients who want to move their belongings to the new frontier of space.
                      </p>

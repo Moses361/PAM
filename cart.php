@@ -341,7 +341,7 @@ if(mysqli_num_rows($run_cart2) > 0){
               </tr>
               <tr>
 
-                <td>Transportation And Packing </td>
+                <td>Packing cost </td>
                 <th>Ksh.0</th>
 
               </tr>
