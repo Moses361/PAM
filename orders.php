@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // order has been processed. Update referrals
         $session_email = trim($_SESSION['customer_email']);
-        $sql = "UPDATE referals SET redeemed=true WHERE username='$session_email';";
+        $sql = "UPDATE referals SET redeemed=true WHERE initiator='$session_email';";
         $query = mysqli_query($con, $sql);
         if (!$query){
             die("Unable to update referrals: ".mysqli_error($con));

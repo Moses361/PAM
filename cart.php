@@ -3,6 +3,10 @@ $active = 'SHOPPING CART';
 //  date_default_timezone_set('UTC');
 include("includes/header.php");
 
+if(!isset($_SESSION['customer_email'])){
+  die("Kndly log in to access your order cart!");
+}
+
 $intiator = trim($_SESSION['customer_email']);
 
 $discount = 0;

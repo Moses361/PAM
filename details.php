@@ -103,7 +103,9 @@ if (isset($_POST['addToCar'])) {
 
 
                         <?php
-                        // if(!empty($_GET['add_cart'])  && !empty($_POST['product_qty']) && !empty($_POST['product_size'])){
+                        if(!isset($_SESSION['customer_email'])){
+                            die("You should be logged in to Add items to cart");
+                        }
                         $total = total_price2();
                         add_cart($total);
                         // $_SESSION['new_total'] = get_total();

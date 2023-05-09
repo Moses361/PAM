@@ -157,7 +157,7 @@
                     </div><!-- col-xs-3 finish -->
                     
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right begin -->
-                        <div class="huge"> <?php echo $count_pending_orders; ?> </div>
+                        <div class="huge"> </div>
                            
                         <div> Orders </div>
                         
