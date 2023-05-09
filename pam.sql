@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 30, 2023 at 10:18 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Host: 127.0.0.1
+-- Generation Time: May 09, 2023 at 08:12 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,13 +65,6 @@ CREATE TABLE `cart` (
   `order_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`p_id`, `ip_add`, `qty`, `p_price`, `size`, `id`, `transport_cost`, `origin`, `destination`, `order_date`) VALUES
-(31, '::1', 3, '25500', 'Durable', 28, 291, 'Nairobi', 'Nyeri', '2023-03-30 21:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -112,7 +105,8 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `second_name`, `custome
 (15, 'Tonny', 'Victor', 'tonny@gmail.com', '1234', 'Kiambu', 'nairobi', '0790102001', 'Nairobi ', 'download.jpg', '::1'),
 (16, 'tony', 'tony3', 'tony@gmail.com', '1234', 'kitui', 'nairobi', '0790102001', 'None', 'farm 1.jfif', '::1'),
 (17, 'edwin', 'ochieng', 'edwinochieng@gmail.com', '1234', 'Siaya', 'nairobi', '0746482121', 'Kiambu', 'movers.jpg', '::1'),
-(18, 'Joseph ', 'Kariuki', 'jose@gmail.com', '1234', 'Nyeri', 'nairobi', '0758826552', 'Nyeri', 'farm.jfif', '::1');
+(18, 'Joseph ', 'Kariuki', 'jose@gmail.com', '1234', 'Nyeri', 'nairobi', '0758826552', 'Nyeri', 'farm.jfif', '::1'),
+(19, 'Kodondi', 'Shadrack', 'kodondi@gmail.com', '1234', 'Nairobi', 'nairobi', '0759930912', 'Juja', 'admin side.png', '::1');
 
 -- --------------------------------------------------------
 
@@ -191,15 +185,6 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer`, `order_id`, `payment_status`, `amount`, `origin`, `destination`, `order_date`) VALUES
-(58, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:11:02'),
-(59, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:11:26'),
-(60, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Western', 'Rift valley', '2023-03-26 14:12:00'),
-(61, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Coast', 'Nairobi', '2023-03-26 14:12:30'),
-(62, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Coast', '2023-03-26 14:13:15'),
-(63, 'moses@gmail.com', '4567uhhj', 'pending', '10500', 'Nairobi', 'Rift valley', '2023-03-26 14:13:45'),
-(64, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Rift valley', 'Coast', '2023-03-26 14:33:02'),
-(65, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', '2023-03-26 14:09:51'),
-(66, 'moses@gmail.com', '4567uhhj', 'pending', '27100', 'Nairobi', 'Rift valley', '2023-03-28 21:00:00'),
 (68, 'moses@gmail.com', '714940', 'pending', '27100', 'Nairobi', 'Coast', '2023-03-31 21:00:00'),
 (69, 'moses@gmail.com', '295482', 'pending', '27100', 'Rift valley', 'Nairobi', '2023-03-27 21:00:00'),
 (70, 'johniekyalo001@gmail.com', '619841', 'pending', '25500', 'Nairobi', 'Western', '2023-04-05 21:00:00'),
@@ -221,7 +206,11 @@ INSERT INTO `orders` (`id`, `customer`, `order_id`, `payment_status`, `amount`, 
 (102, 'jose@gmail.com', '957053', 'Paid', '8300', 'Nairobi', 'Nairobi', '2023-03-29 21:00:00'),
 (103, 'jose@gmail.com', '361128', 'Paid', '5500', 'Kakamega', 'Nairobi', '2023-03-31 21:00:00'),
 (104, 'jose@gmail.com', '236304', 'Paid', '5500', 'Nairobi', 'Sotik', '2023-03-31 21:00:00'),
-(105, 'jose@gmail.com', '424038', 'Cancelled', '20000', 'Nairobi', 'Nyeri', '2023-03-30 21:00:00');
+(105, 'jose@gmail.com', '424038', 'Cancelled', '20000', 'Nairobi', 'Nyeri', '2023-03-30 21:00:00'),
+(106, 'moses@gmail.com', '171670', 'pending', '75390', 'Nairobi', 'Kisumu', '2023-04-12 21:00:00'),
+(107, 'moses@gmail.com', '171670', 'pending', '75390', 'Nairobi', 'Kisumu', '2023-04-12 21:00:00'),
+(108, 'moses@gmail.com', '778279', 'pending', '8066', 'Nairobi', 'Malindi', '2023-04-12 10:03:33'),
+(109, 'kodondi@gmail.com', '855252', 'pending', '32295', 'Kisumu', 'Nairobi', '2023-04-12 12:22:09');
 
 -- --------------------------------------------------------
 
@@ -369,19 +358,20 @@ CREATE TABLE `referals` (
 --
 
 INSERT INTO `referals` (`id`, `username`, `date`, `link_code`, `initiator`, `discount`, `redeemed`) VALUES
-(1, 'colls', '12-12-2023', 'rtyu88', 'devida@gmail.com', 34, 0),
-(2, 'test@gmail.com', '2023-03-07 09:00:02', 'test@gmail.com', 'devida@gmail.com', 100, 0),
-(3, 'will@gmail.com', '2023-03-07 07:24:20', 'will@gmail.com', 'moses@gmail.com', 100, 0),
-(4, 'linky@gmail.com', '2023-03-07 07:27:12', 'linky@gmail.com', 'moses@gmail.com', 100, 0),
-(5, 'maureen@gmail.com', '2023-03-08 11:08:37', 'maureen@gmail.com', 'moses@gmail.com', 100, 0),
-(6, 'faith@gmail.com', '2023-03-08 11:10:55', 'faith@gmail.com', 'maureen@gmail.com', 100, 0),
-(7, 'ronny@gmail.com', '2023-03-09 07:15:09', 'ronny@gmail.com', 'moses@gmail.com', 100, 0),
-(8, 'vivian@gmail.com', '2023-03-09 19:30:54', 'vivian@gmail.com', 'maureen@gmail.com', 100, 0),
-(9, 'johniekyalo001@gmail.com', '2023-03-09 19:42:13', 'johniekyalo001@gmail.com', 'odhismose20@gmail.com', 100, 0),
-(10, 'tonny@gmail.com', '2023-03-10 13:30:41', 'tonny@gmail.com', 'moses@gmail.com', 100, 0),
-(11, 'tony@gmail.com', '2023-03-12 07:33:32', 'tony@gmail.com', 'odhismose20@gmail.com', 100, 0),
-(12, 'edwinochieng@gmail.com', '2023-03-17 15:55:14', 'edwinochieng@gmail.com', 'moses@gmail.com', 200, 0),
-(13, 'jose@gmail.com', '2023-03-27 20:05:03', 'moses@gmail.com', 'jose@gmail.com', 200, 1);
+(1, 'colls', '12-12-2023', 'rtyu88', 'devida@gmail.com', 200, 0),
+(2, 'test@gmail.com', '2023-03-07 09:00:02', 'test@gmail.com', 'devida@gmail.com', 200, 0),
+(3, 'will@gmail.com', '2023-03-07 07:24:20', 'will@gmail.com', 'moses@gmail.com', 200, 1),
+(4, 'linky@gmail.com', '2023-03-07 07:27:12', 'linky@gmail.com', 'moses@gmail.com', 200, 1),
+(5, 'maureen@gmail.com', '2023-03-08 11:08:37', 'maureen@gmail.com', 'moses@gmail.com', 200, 1),
+(6, 'faith@gmail.com', '2023-03-08 11:10:55', 'faith@gmail.com', 'maureen@gmail.com', 200, 0),
+(7, 'ronny@gmail.com', '2023-03-09 07:15:09', 'ronny@gmail.com', 'moses@gmail.com', 200, 1),
+(8, 'vivian@gmail.com', '2023-03-09 19:30:54', 'vivian@gmail.com', 'maureen@gmail.com', 200, 0),
+(9, 'johniekyalo001@gmail.com', '2023-03-09 19:42:13', 'johniekyalo001@gmail.com', 'odhismose20@gmail.com', 200, 0),
+(10, 'tonny@gmail.com', '2023-03-10 13:30:41', 'tonny@gmail.com', 'moses@gmail.com', 200, 1),
+(11, 'tony@gmail.com', '2023-03-12 07:33:32', 'tony@gmail.com', 'odhismose20@gmail.com', 200, 0),
+(12, 'edwinochieng@gmail.com', '2023-03-17 15:55:14', 'edwinochieng@gmail.com', 'moses@gmail.com', 200, 1),
+(13, 'jose@gmail.com', '2023-03-27 20:05:03', 'moses@gmail.com', 'jose@gmail.com', 200, 1),
+(14, 'kodondi@gmail.com', '2023-04-12 14:17:33', 'kodondi@gmail.com', 'moses@gmail.com', 200, 0);
 
 -- --------------------------------------------------------
 
@@ -451,7 +441,10 @@ INSERT INTO `transactions` (`id`, `order_id`, `transaction_id`, `checked`) VALUE
 (5, 957053, '', 1),
 (6, 361128, '', 1),
 (7, 236304, 'ws_CO_30032023110203044114662464', 1),
-(8, 424038, 'ws_CO_30032023111235831114662464', 1);
+(8, 424038, 'ws_CO_30032023111235831114662464', 1),
+(9, 171670, '', 0),
+(10, 778279, '', 0),
+(11, 855252, '', 0);
 
 --
 -- Indexes for dumped tables
@@ -561,13 +554,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `customer_orders`
@@ -585,7 +578,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `order_items`
@@ -621,7 +614,7 @@ ALTER TABLE `product_categories`
 -- AUTO_INCREMENT for table `referals`
 --
 ALTER TABLE `referals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `slider`
@@ -639,7 +632,7 @@ ALTER TABLE `terms`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
