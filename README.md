@@ -1,19 +1,29 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# PAM
-=======
-=======
->>>>>>> 46aeb89965246a13d36b2fed3b79eda515350cf1
-<<<<<<< HEAD
-# Ecommerce site
-http://shepresident.great-site.net
-=======
-# PAM
->>>>>>> 5224c43 (Initial commit)
-<<<<<<< HEAD
->>>>>>> c8ad7d80d8294760beb30d4706ee97a3b11878f7
-=======
-=======
-# PAM
->>>>>>> 5224c43 (Initial commit)
->>>>>>> 46aeb89965246a13d36b2fed3b79eda515350cf1
+
+# Packers And Movers
+## About
+Packers and Movers is  web application project whose main aim is to provide information and services related to relocating goods from one place to another.Clients can therefore find and hire reliable movers for their relocation needs.
+
+## Key Functionalities
+- Referral System
+- Booking of Houses, Offiece rooms, warehouses etc.
+- Customer Ordering and Cart System
+- Checkout via M-Pesa (Safaricom Daraja)
+- Auto-calculating price depending on delivery location
+## Technologies Used
+- HMTL5
+- CSS3
+- Javascript
+- PHP
+- Bootstrap
+- JQuery
+
+## Database Used
+- MySQL
+
+## Hosting Platform
+This website is hosted under a free plan by [000 Webhost](https://www.000webhost.com/), and affiliate of [Hostinger.com](https://hostinger.com)
+
+## Project ScreenShots
+
+## Project Link
+[Click this link](https://packers-and-mover.000webhostapp.com/index.php)to view the live website.
